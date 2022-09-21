@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "facultyportal-frontend", "facultyportal-frontend\facultyportal-frontend.esproj", "{D3BE1C2A-C673-477F-A487-4D1C461992EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "facultyportal-backend", "facultyportal-backend\facultyportal-backend.csproj", "{27678E00-F58C-4899-8B89-C915D0379D6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BE1C2A-C673-477F-A487-4D1C461992EC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{27678E00-F58C-4899-8B89-C915D0379D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27678E00-F58C-4899-8B89-C915D0379D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27678E00-F58C-4899-8B89-C915D0379D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27678E00-F58C-4899-8B89-C915D0379D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA9D7734-5108-413E-930A-C5CA64A66A3D}
+	EndGlobalSection
+EndGlobal
