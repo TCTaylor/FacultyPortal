@@ -1,0 +1,2 @@
+C:\Users\Tracey Taylor\source\repos\FacultyPortal\facultyportal-frontend\obj\Debug\facultyportal-frontend.esproj.SuggestedBindingRedirects.cache
+C:\Users\Tracey Taylor\source\repos\FacultyPortal\facultyportal-frontend\obj\Debug\facultyportal-frontend.esproj.CoreCompileInputs.cache
