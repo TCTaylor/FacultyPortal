@@ -3,7 +3,7 @@
     public class Section
     {
         public int Id { get; set; }
-        public int CourseId { get; set; }
+        public int Course_Id { get; set; }
         public int Number { get; set; }
     }
 }

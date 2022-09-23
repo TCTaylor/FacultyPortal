@@ -3,7 +3,7 @@
     public class FacultyQualification
     {
         public int Id { get; set; }
-        public int FacultyId { get; set; }
-        public int QualId { get; set; }
+        public int Faculty_Id { get; set; }
+        public int Qual_Id { get; set; }
     }
 }
