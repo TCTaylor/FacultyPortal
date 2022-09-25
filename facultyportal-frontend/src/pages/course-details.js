@@ -1,4 +1,3 @@
-import {variables} from '../components/Variables.js';
 
 function CourseDetails() {
     return (
