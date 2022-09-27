@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pRUi8QPX2QM2kre3P3jBbseA+jJot9ipwIEGQRl7x2WLUjfI+0mAciAzlxULhVyEMRlf95+2dxrQtlmUS7ZOUg==",
+  "dgSpecHash": "nbCLnh4Q/Yp3WP865vCBEEZnOEm4UlIwWgyLHjmwOpK7u0RhCT2dRyuQRhJEOo0TLz2rY+eK/WRWOHgaIBL4bQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Tracey Taylor\\source\\repos\\FacultyPortal\\facultyportal-backend\\facultyportal-backend.csproj",
   "expectedPackageFiles": [
@@ -42,6 +42,7 @@
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
+    "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
