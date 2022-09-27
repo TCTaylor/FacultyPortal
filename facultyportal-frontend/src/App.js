@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Provider } from "react-redux";
+import React from 'react';
 import Navigation from './pages/navigation/navigation.component';
 import Home from './pages/home/home.component';
 import SignIn from './pages/sign-in/sign-in.component';
-import FacultyCourses from './pages/faculty-courses';
-import CourseDetails from './pages/course-details';
+import FacultyCourses from './pages/faculty-courses/faculty-courses.component';
+import CourseDetails from './pages/course-details/course-details.component';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import api from './api/agent';
 
 function App() {
 
