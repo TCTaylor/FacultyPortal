@@ -6,8 +6,7 @@ namespace facultyportal_backend.Data
     public class FacultyPortalDbContext : DbContext
     {
         public FacultyPortalDbContext(DbContextOptions<FacultyPortalDbContext> options): base(options)
-        {
-        }
+        {  }
 
         public DbSet<Course> Course { get; set; }
         public DbSet<Division> Division { get; set; }

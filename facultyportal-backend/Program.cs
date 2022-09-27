@@ -1,5 +1,6 @@
 using facultyportal_backend.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Connect to database
+string connString = builder.Configuration.GetConnectionString("FPLocalDbConnection");
 builder.Services.AddDbContext<FacultyPortalDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FacultyPortalDbConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString(connString)));
 
 // Enable Cross-Origin Requests (CORS)
 builder.Services.AddCors(c =>
@@ -43,5 +45,11 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllers();
+//    //endpoints.MapFallbackToController("Index","Fallback");
+//});
 
 app.Run();
