@@ -1,12 +1,16 @@
-import './search-box.styles.css';
+import "./search-box.styles.css";
 
-function SearchBox({ className, placeholder, onChangeHandler }) {
-    <input
-        className={className}
-        type='search'
-        placeholder={placeholder}
+function SearchBox({ onChangeHandler }) {
+  return (
+    <div>
+      <input
+        className="search-box"
+        type="search"
+        placeholder="Search courses"
         onChange={onChangeHandler}
-    />
+      />
+    </div>
+  );
 }
 
 export default SearchBox;

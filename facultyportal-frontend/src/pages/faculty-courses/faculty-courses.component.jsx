@@ -1,54 +1,54 @@
-import CourseList from '../../components/course-list/course-list.component';
-import SearchBox from '../../components/search-box/search-box.component';
-import { useState, useEffect } from 'react';
+import CourseList from "../../components/course-list/course-list.component";
+import SearchBox from "../../components/search-box/search-box.component";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const baseURL = 'http://localhost:3000/api'
+const baseURL = "http://localhost:3000/api";
 
 function FacultyCourses() {
-    
-    const [searchField, setSearchField] = useState('');
-    const [courses, setCourses] = useState([]);
-    const [filteredCourses, setFilteredCourses] = useState(courses);
-    const [error, setError] = useState(null);
-    
-    useEffect(() => {
-        axios("https://jsonplaceholder.typicode.com/users")
-          .then((response) => {
-            setCourses(response.data);
-            setError(null);
-          })
-          .catch(setError);
-    }, []);
-    if (error) return <p>An error occurred</p>
+  const [searchField, setSearchField] = useState(""); // [value, setValue]
+  const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState(courses);
+  const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const newFilteredCourses = courses.filter((course) => {
-    //       return course.name.toLocaleLowerCase().includes(searchField);
-    //     });
+  useEffect(() => {
+    axios("https://jsonplaceholder.typicode.com/users")
+      .then((response) => {
+        setCourses(response.data);
+        setError(null);
+      })
+      .catch(setError);
+  }, []);
+  if (error) return <p>An error occurred</p>;
 
-    //     setFilteredCourses(newFilteredCourses);
-    // }, [courses, searchField]);
+//   useEffect(() => {
+//       const newFilteredCourses = courses.filter((course) => {
+//         return course.name.toLocaleLowerCase().includes(searchField);
+//       });
 
-    const onSearchChange = (event) => {
-        const searchFieldString = event.target.value.toLocaleLowerCase();
-        setSearchField(searchFieldString);
-    };
+//       setFilteredCourses(newFilteredCourses);
+//   }, [courses, searchField]);
 
-    return (
-        <div>
-            <h1>This is the Courses page</h1>
+  const onSearchChange = (event) => {
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setSearchField(searchFieldString);
+  };
 
-            <SearchBox
-                className='courses-search-box'
-                placeholder='search your courses'
-                onChangeHandler={onSearchChange}
-            />
+  return (
+    <div>
+      <h1>This is the Courses page</h1>
 
-            {/* <CourseList courses={ courses } /> */}
+      <SearchBox
+        className="search-box"
+        type="search"
+        placeholder="Search courses"
+        onChangeHandler={onSearchChange}
+      />
 
-        </div>
-    )
+      <CourseList courses={courses} />
+
+    </div>
+  );
 }
 
 export default FacultyCourses;
