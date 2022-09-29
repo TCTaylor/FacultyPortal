@@ -11,6 +11,7 @@ function FacultyCourses() {
   const [filteredCourses, setFilteredCourses] = useState(courses);
   const [error, setError] = useState(null);
 
+  // Be sure to not make an early return before all useEffect Hooks have been called.
   useEffect(() => {
     axios("https://jsonplaceholder.typicode.com/users")
       .then((response) => {
@@ -19,19 +20,24 @@ function FacultyCourses() {
       })
       .catch(setError);
   }, []);
+
+  useEffect(() => {
+    const newFilteredCourses = courses.filter((course) => {
+      return course.name.toLocaleLowerCase().includes(searchField);
+    });
+
+    setFilteredCourses(newFilteredCourses);
+  }, [courses, searchField]);
+
+  // Place this error handler after all Hooks in case of an early return due to error.
   if (error) return <p>An error occurred</p>;
-
-//   useEffect(() => {
-//       const newFilteredCourses = courses.filter((course) => {
-//         return course.name.toLocaleLowerCase().includes(searchField);
-//       });
-
-//       setFilteredCourses(newFilteredCourses);
-//   }, [courses, searchField]);
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
+
+    console.log(onSearchChange);
+    console.log(searchFieldString);
   };
 
   return (
@@ -45,8 +51,7 @@ function FacultyCourses() {
         onChangeHandler={onSearchChange}
       />
 
-      <CourseList courses={courses} />
-
+      <CourseList courses={filteredCourses} />
     </div>
   );
 }
