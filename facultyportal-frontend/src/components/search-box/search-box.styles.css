@@ -2,11 +2,11 @@
 /* Pulled from monsters-rolodex from Yihua Zhang's Udemy course "Complete React Developer in 2022" */
 
 .search-box {
-    -webkit-appearance: none;
-    border: none;
-    outline: none;
-    padding: 10px;
-    width: 150px;
-    line-height: 30px;
-    margin-bottom: 30px;
-  }
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  padding: 10px;
+  width: 150px;
+  line-height: 30px;
+  margin-bottom: 30px;
+}

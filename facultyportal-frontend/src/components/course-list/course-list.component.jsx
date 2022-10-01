@@ -1,21 +1,22 @@
 import React from "react";
 import Card from "../card/card-component";
-import { Link } from "react-router-dom";
+import "./course-list.styles.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 // const baseURL = 'http://localhost:3000/api'
 
 function CourseList({ courses }) {
+
   return (
     <div className="card-list">
       {courses.map((course) => {
-        return <Card key={course.id} course={course} />;
+        return (
+          <div key={course.id}>
+            <Card course={course} />
+          </div>
+        );
       })};
-
-      <Link className="nav-link" to="/course-details">
-        View Course Details
-      </Link>
     </div>
   );
 

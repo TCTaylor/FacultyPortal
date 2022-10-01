@@ -14,11 +14,18 @@ function FacultyCourses() {
   // Be sure to not make an early return before all useEffect Hooks have been called.
   useEffect(() => {
     axios("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        setCourses(response.data);
-        setError(null);
-      })
-      .catch(setError);
+    //axios(baseURL + "/Courses")
+      .then(
+        (response) => {
+        if (!response.data || response.data.length == 0) {
+          setError(new Error('Invalid data'));
+        }
+        else {
+          setCourses(response.data);
+        }
+      }).catch(function (error) {
+        console.log(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -52,6 +59,7 @@ function FacultyCourses() {
       />
 
       <CourseList courses={filteredCourses} />
+
     </div>
   );
 }
