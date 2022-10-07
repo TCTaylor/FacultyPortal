@@ -14,7 +14,7 @@ function App() {
         <Route path='/' element = {< Navigation />}>
           <Route index element = {< Home />}/>  
           <Route path='/faculty-courses' element = {< FacultyCourses />}/>  
-          <Route path='/course-details' element = {< CourseDetails />}/> 
+          <Route path='/course-details/:id' element = {< CourseDetails />}/> 
           <Route path='/sign-in' element = {< SignIn />}/>
         </Route>
       </Routes>

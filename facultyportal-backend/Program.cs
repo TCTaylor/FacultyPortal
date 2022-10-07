@@ -12,6 +12,8 @@ builder.Services.AddSwaggerGen();
 
 // Connect to database
 string connString = builder.Configuration.GetConnectionString("FPLocalDbConnection");
+//string connString = builder.Configuration.GetConnectionString("FPVirtualDbConnection");
+//string connString = builder.Configuration.GetConnectionString("FPLinuxDbConnection");
 builder.Services.AddDbContext<FacultyPortalDbContext>(options =>
     options.UseSqlServer(connString));
 
@@ -20,12 +22,6 @@ builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
-
-//// JSON Serializer
-//builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
-//    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-//        .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
-//        = new DefaultContractResolver());
 
 var app = builder.Build();
 
@@ -44,11 +40,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllers();
-//    //endpoints.MapFallbackToController("Index","Fallback");
-//});
 
 app.Run();

@@ -1,19 +1,23 @@
 import "./card.styles.css";
+import CourseDetails from "../../pages/course-details/course-details.component";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function Card({ course }) {
-  const { id, name, email } = course;
+  const { subject, number, title } = course;
 
   return (
     <div className="card-container">
-      {/* <img
-        alt={`course ${name}`}
-        src={`https://robohash.org/${id}?set=set2&size=180x180`}
-      /> */}
-      <h2>{name}</h2>
-      <p>{email}</p>
-      <Link className="nav-link" to="/course-details">
-        Details
+      <h2>{subject + " " + number}</h2>
+      <p>{title}</p>
+
+      <Link
+        to={{
+          pathname: "/course-details",
+          state: { course },
+        }}
+      >
+        <button>Details</button>
       </Link>
     </div>
   );
