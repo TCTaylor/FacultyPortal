@@ -1,7 +1,7 @@
 import DetailsList from "../../components/details-list/details-list.component";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const API_BASE_URL = "https://localhost:7078/api";
 
@@ -11,7 +11,7 @@ function CourseDetails() {
   const [course, setCourse] = useState([]);
   // const [error, setError] = useState(Error());
 
-  // Will call data from FacultyCourse controller
+  // Will call CourseDetails controller
   useEffect(() => {
     axios
       .get(API_BASE_URL + "/Courses/" + id)
@@ -19,7 +19,7 @@ function CourseDetails() {
         setCourse(response.data);
       })
       .catch((error) => {
-        console.log("Error in CourseDetails");
+        console.log("Error in CourseDetails component");
         console.log(error);
       });
   }, []);

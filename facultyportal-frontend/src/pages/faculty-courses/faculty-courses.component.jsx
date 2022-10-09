@@ -11,14 +11,16 @@ function FacultyCourses() {
   const [filteredCourses, setFilteredCourses] = useState(courses);
   // const [error, setError] = useState(Error());
 
+  // Will call the FacultyCourses controller
   useEffect(() => {
     //axios("https://jsonplaceholder.typicode.com/users")
     axios(API_BASE_URL + "/Courses")
       .then((response) => {
         setCourses(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
-        console.log("Error in FacultyCourses");
+        console.log("Error in FacultyCourses component");
         console.log(error);
       });
   }, []);

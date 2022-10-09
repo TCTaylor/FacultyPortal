@@ -1,5 +1,8 @@
+using AutoMapper;
 using facultyportal_backend.Data;
+using facultyportal_backend.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,7 @@ builder.Services.AddSwaggerGen();
 string connString = builder.Configuration.GetConnectionString("FPLocalDbConnection");
 //string connString = builder.Configuration.GetConnectionString("FPVirtualDbConnection");
 //string connString = builder.Configuration.GetConnectionString("FPLinuxDbConnection");
-builder.Services.AddDbContext<FacultyPortalDbContext>(options =>
+builder.Services.AddDbContext<FacultyPortalContext>(options =>
     options.UseSqlServer(connString));
 
 // Enable Cross-Origin Requests (CORS)
@@ -22,6 +25,9 @@ builder.Services.AddCors(c =>
 {
     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
+
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 var app = builder.Build();
 

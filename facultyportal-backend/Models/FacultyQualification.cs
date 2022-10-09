@@ -1,9 +1,15 @@
-﻿namespace facultyportal_backend.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace facultyportal_backend.Models
 {
-    public class FacultyQualification
+    public partial class FacultyQualification
     {
         public int Id { get; set; }
-        public int Faculty_Id { get; set; }
-        public int Qual_Id { get; set; }
+        public int FacultyId { get; set; }
+        public int QualId { get; set; }
+
+        public virtual Faculty Faculty { get; set; } = null!;
+        public virtual Qualification Qual { get; set; } = null!;
     }
 }

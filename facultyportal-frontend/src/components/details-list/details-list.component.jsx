@@ -1,5 +1,5 @@
 function DetailsList({ course }) {
-  const { id, subject, number, title, division_Id, qual_Id, max_Size, min_Size } =
+  const { id, subject, courseNumber, title, divisionId, qualId, maxSize, minSize } =
     course;
 
   return (
@@ -19,12 +19,12 @@ function DetailsList({ course }) {
         <tbody>
           <tr key={id}>
             <td>{subject}</td>
-            <td>{number}</td>
+            <td>{courseNumber}</td>
             <td>{title}</td>
-            <td>{division_Id}</td>
-            <td>{qual_Id}</td>
-            <td>{max_Size}</td>
-            <td>{min_Size}</td>
+            <td>{divisionId}</td>
+            <td>{qualId}</td>
+            <td>{maxSize}</td>
+            <td>{minSize}</td>
           </tr>
         </tbody>
       </table>

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using facultyportal_backend.Data;
 using facultyportal_backend.Models;
+using facultyportal_backend.Data;
 
 namespace facultyportal_backend.Controllers
 {
@@ -14,9 +14,9 @@ namespace facultyportal_backend.Controllers
     [ApiController]
     public class FacultyCoursesController : ControllerBase
     {
-        private readonly FacultyPortalDbContext _context;
+        private readonly FacultyPortalContext _context;
 
-        public FacultyCoursesController(FacultyPortalDbContext context)
+        public FacultyCoursesController(FacultyPortalContext context)
         {
             _context = context;
         }
@@ -25,14 +25,14 @@ namespace facultyportal_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FacultyCourse>>> GetFacultyCourse()
         {
-            return await _context.FacultyCourse.ToListAsync();
+            return await _context.FacultyCourses.ToListAsync();
         }
 
         // GET: api/FacultyCourses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FacultyCourse>> GetFacultyCourse(int id)
         {
-            var facultyCourse = await _context.FacultyCourse.FindAsync(id);
+            var facultyCourse = await _context.FacultyCourses.FindAsync(id);
 
             if (facultyCourse == null)
             {
@@ -78,7 +78,7 @@ namespace facultyportal_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<FacultyCourse>> PostFacultyCourse(FacultyCourse facultyCourse)
         {
-            _context.FacultyCourse.Add(facultyCourse);
+            _context.FacultyCourses.Add(facultyCourse);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFacultyCourse", new { id = facultyCourse.Id }, facultyCourse);
@@ -88,13 +88,13 @@ namespace facultyportal_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFacultyCourse(int id)
         {
-            var facultyCourse = await _context.FacultyCourse.FindAsync(id);
+            var facultyCourse = await _context.FacultyCourses.FindAsync(id);
             if (facultyCourse == null)
             {
                 return NotFound();
             }
 
-            _context.FacultyCourse.Remove(facultyCourse);
+            _context.FacultyCourses.Remove(facultyCourse);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace facultyportal_backend.Controllers
 
         private bool FacultyCourseExists(int id)
         {
-            return _context.FacultyCourse.Any(e => e.Id == id);
+            return _context.FacultyCourses.Any(e => e.Id == id);
         }
     }
 }

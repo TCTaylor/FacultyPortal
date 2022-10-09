@@ -1,10 +1,17 @@
-﻿namespace facultyportal_backend.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace facultyportal_backend.Models
 {
-    public class FacultyCourse
+    public partial class FacultyCourse
     {
         public int Id { get; set; }
-        public int Faculty_Id { get; set; }
-        public int Course_Id { get; set; }
-        public string Section_Id { get; set; }
+        public int FacultyId { get; set; }
+        public int CourseId { get; set; }
+        public int SectionId { get; set; }
+
+        public virtual Course Course { get; set; } = null!;
+        public virtual Faculty Faculty { get; set; } = null!;
+        public virtual Section Section { get; set; } = null!;
     }
 }

@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function Card({ course }) {
-  const { id, subject, number, title } = course;
+  const { id, subject, courseNumber, title } = course;
 
   return (
     <div className="card-container">
-      <h2>{subject + " " + number}</h2>
+      <h2>{subject + " " + courseNumber}</h2>
       <p>{title}</p>
       <Link to={"/course-details/" + id}>
         <button>Details</button>

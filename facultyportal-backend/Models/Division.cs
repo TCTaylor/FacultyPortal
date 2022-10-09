@@ -1,8 +1,18 @@
-﻿namespace facultyportal_backend.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace facultyportal_backend.Models
 {
-    public class Division
+    public partial class Division
     {
-        public string Id { get; set; }
-        public string Name { get; set; } 
+        public Division()
+        {
+            Courses = new HashSet<Course>();
+        }
+
+        public string Id { get; set; } = null!;
+        public string Name { get; set; } = null!;
+
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }
