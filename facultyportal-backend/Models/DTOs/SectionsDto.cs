@@ -3,6 +3,7 @@
     public class SectionsDto
     {
         public int Id { get; set; }
-        public string SectionNumber { get; set; }
+        public string Number { get; set; }
+
     }
 }

@@ -1,12 +1,4 @@
-﻿using facultyportal_backend.Models;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace facultyportal_backend.Models.DTOs
+﻿namespace facultyportal_backend.Models.DTOs
 {
     public class CoursesDto
     {
@@ -19,9 +11,6 @@ namespace facultyportal_backend.Models.DTOs
         public int MinSize { get; set; }
         public int DivisionName { get; set; }
         public int SectionNumber { get; set; }
-
-        //public ICollection<DivisionsDto> DivisionsDto { get; set; }
-       // public ICollection<SectionsDto> SectionsDto { get; set; }
 
     }
 }

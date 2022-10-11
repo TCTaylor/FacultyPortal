@@ -21,15 +21,15 @@ namespace facultyportal_backend.Application.CourseDetails
 
         public async Task<List<CoursesDto>> GetDetails(int id)
         {
-            var courseDetails = _context.Courses
-                .Include(c => c.Divisions)
+            var courseDetails = await _context.Courses
+                .Include(c => c.Division)
                 .Include(c => c.Sections)
                 .Where(c => c.Id == id)
                 .OrderBy(c => c.Title)
                 .ProjectTo<CoursesDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            return courseDetails.Result;
+            return courseDetails;
 
             //var courseDetails = _context.Courses
             //    .Include(c => c.Divisions)

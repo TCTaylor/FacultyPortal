@@ -9,6 +9,11 @@ namespace facultyportal_backend.Helpers
         public AutoMapperProfile()
         {
             CreateMap<Course, CoursesDto>();
-        }
+            CreateMap<Division, DivisionsDto>();
+            CreateMap<FacultyCourse, FacultyCoursesDto>();
+            CreateMap<Faculty, FacultyDto>();
+            CreateMap<FacultyQualification, FacultyQualificationsDto>();
+            CreateMap<Qualification, QualificationsDto>();
+            CreateMap<Section, SectionsDto>();        }
     }
 }

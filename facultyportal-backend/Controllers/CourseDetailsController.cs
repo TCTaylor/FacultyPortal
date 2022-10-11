@@ -32,7 +32,7 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<CoursesDto>> GetCourseDetails(int id)
         {
             var courseDetails = await _context.Courses
-                .Include(c => c.Divisions)
+                .Include(c => c.Division)
                 .Include(c => c.Sections)
                 .Where(c => c.Id == id)
                 .OrderBy(c => c.Title)

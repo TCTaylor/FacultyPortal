@@ -29,7 +29,6 @@ namespace facultyportal_backend.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=localhost\\SQLExpress;Database=FacultyPortal;Trusted_Connection=True;");
             }
         }
 
@@ -38,11 +37,6 @@ namespace facultyportal_backend.Data
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.ToTable("Course");
-
-                entity.Property(e => e.CourseNumber)
-                    .HasMaxLength(4)
-                    .IsUnicode(false)
-                    .HasColumnName("Course_Number");
 
                 entity.Property(e => e.DivisionId)
                     .HasMaxLength(2)
@@ -53,7 +47,16 @@ namespace facultyportal_backend.Data
 
                 entity.Property(e => e.MinSize).HasColumnName("Min_Size");
 
+                entity.Property(e => e.Number)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.QualId).HasColumnName("Qual_Id");
+
+                entity.Property(e => e.SectionNumber)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("Section_Number");
 
                 entity.Property(e => e.Subject)
                     .HasMaxLength(4)
@@ -63,7 +66,7 @@ namespace facultyportal_backend.Data
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Divisions)
+                entity.HasOne(d => d.Division)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.DivisionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -181,10 +184,9 @@ namespace facultyportal_backend.Data
 
                 entity.Property(e => e.CourseId).HasColumnName("Course_Id");
 
-                entity.Property(e => e.SectionNumber)
+                entity.Property(e => e.Number)
                     .HasMaxLength(3)
-                    .IsUnicode(false)
-                    .HasColumnName("Section_Number");
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.Sections)

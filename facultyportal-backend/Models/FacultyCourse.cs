@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace facultyportal_backend.Models
+﻿namespace facultyportal_backend.Models
 {
     public partial class FacultyCourse
     {
