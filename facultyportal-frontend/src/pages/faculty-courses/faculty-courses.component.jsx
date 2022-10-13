@@ -6,21 +6,25 @@ import axios from "axios";
 const API_BASE_URL = "https://localhost:7078/api";
 
 function FacultyCourses() {
-  const [searchField, setSearchField] = useState(""); // [value, setValue]
+  const [isLoading, setIsLoading] = useState(true);
   const [courses, setCourses] = useState([]);
+  const [searchField, setSearchField] = useState(""); // [value, setValue]
   const [filteredCourses, setFilteredCourses] = useState(courses);
-  // const [error, setError] = useState(Error());
+  const [error, setError] = useState(false);
 
   // Will call the FacultyCourses controller
   useEffect(() => {
-    //axios("https://jsonplaceholder.typicode.com/users")
-    axios(API_BASE_URL + "/Courses")
+    axios
+      //.get("https://jsonplaceholder.typicode.com/users")
+      .get(API_BASE_URL + "/Courses")
       .then((response) => {
         setCourses(response.data);
-        console.log(response.data);
+        setIsLoading(false);
+        //console.log(response.data);
       })
       .catch((error) => {
-        console.log("Error in FacultyCourses component");
+        setError(true);
+        setIsLoading(false);
         console.log(error);
       });
   }, []);
@@ -37,6 +41,14 @@ function FacultyCourses() {
     const searchFieldString = event.target.value.toLocaleLowerCase();
     setSearchField(searchFieldString);
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>An error occurred.</p>;
+  }
 
   return (
     <div>

@@ -1,7 +1,5 @@
 import "./card.styles.css";
-import CourseDetails from "../../pages/course-details/course-details.component";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function Card({ course }) {
   const { id, subject, number, title } = course;

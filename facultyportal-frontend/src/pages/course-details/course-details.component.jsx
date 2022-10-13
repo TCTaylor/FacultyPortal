@@ -9,27 +9,45 @@ function CourseDetails() {
   const { id } = useParams();
 
   const [course, setCourse] = useState([]);
-  // const [error, setError] = useState(Error());
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  // Will call CourseDetails controller
+  // Will call Courses controller
   useEffect(() => {
     axios
+      //.get("https://jsonplaceholder.typicode.com/users")
       .get(API_BASE_URL + "/Courses/" + id)
       .then((response) => {
         setCourse(response.data);
+        setIsLoading(false);
       })
       .catch((error) => {
-        console.log("Error in CourseDetails component");
+        setError(true);
+        setIsLoading(false);
         console.log(error);
       });
   }, []);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>An error occurred.</p>;
+  }
+  
   return (
     <div>
       <h3>This is the Course Details page</h3>
 
-      <DetailsList course={course} />
-      
+      {course.map((courseObj) => {
+        return (
+          <div key={courseObj.id}>
+            <DetailsList course={courseObj} />
+          </div>
+        );
+      })}
+
     </div>
   );
 }

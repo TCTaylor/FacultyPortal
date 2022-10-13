@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using facultyportal_backend.Data;
+using facultyportal_backend.Models;
+using facultyportal_backend.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using facultyportal_backend.Models;
-using facultyportal_backend.Data;
 
 namespace facultyportal_backend.Controllers
 {
@@ -15,94 +13,100 @@ namespace facultyportal_backend.Controllers
     public class FacultyCoursesController : ControllerBase
     {
         private readonly FacultyPortalContext _context;
+        private readonly IMapper _mapper;
 
-        public FacultyCoursesController(FacultyPortalContext context)
+        public FacultyCoursesController(FacultyPortalContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/FacultyCourses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FacultyCourse>>> GetFacultyCourse()
+        public async Task<ActionResult<IEnumerable<FacultyCoursesDto>>> GetFacultyCourse()
         {
-            return await _context.FacultyCourses.ToListAsync();
+            var facultyCourses = await _context.FacultyCourses
+                .ProjectTo<FacultyCoursesDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            return Ok(facultyCourses);
         }
 
         // GET: api/FacultyCourses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<FacultyCourse>> GetFacultyCourse(int id)
+        public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCourse(int id)
         {
-            var facultyCourse = await _context.FacultyCourses.FindAsync(id);
+            var facultyCourses = await _context.FacultyCourses
+                .Where(c => c.Id == id)
+                .ProjectTo<FacultyCoursesDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
 
-            if (facultyCourse == null)
-            {
-                return NotFound();
-            }
+            if (!facultyCourses.Any()) return NotFound();
 
-            return facultyCourse;
+            return Ok(facultyCourses);
         }
 
-        // PUT: api/FacultyCourses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutFacultyCourse(int id, FacultyCourse facultyCourse)
-        {
-            if (id != facultyCourse.Id)
-            {
-                return BadRequest();
-            }
+    //    // PUT: api/FacultyCourses/5
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPut("{id}")]
+    //    public async Task<IActionResult> PutFacultyCourse(int id, FacultyCourse facultyCourse)
+    //    {
+    //        if (id != facultyCourse.Id)
+    //        {
+    //            return BadRequest();
+    //        }
 
-            _context.Entry(facultyCourse).State = EntityState.Modified;
+    //        _context.Entry(facultyCourse).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FacultyCourseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+    //        try
+    //        {
+    //            await _context.SaveChangesAsync();
+    //        }
+    //        catch (DbUpdateConcurrencyException)
+    //        {
+    //            if (!FacultyCourseExists(id))
+    //            {
+    //                return NotFound();
+    //            }
+    //            else
+    //            {
+    //                throw;
+    //            }
+    //        }
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        // POST: api/FacultyCourses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<FacultyCourse>> PostFacultyCourse(FacultyCourse facultyCourse)
-        {
-            _context.FacultyCourses.Add(facultyCourse);
-            await _context.SaveChangesAsync();
+    //    // POST: api/FacultyCourses
+    //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    //    [HttpPost]
+    //    public async Task<ActionResult<FacultyCourse>> PostFacultyCourse(FacultyCourse facultyCourse)
+    //    {
+    //        _context.FacultyCourses.Add(facultyCourse);
+    //        await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFacultyCourse", new { id = facultyCourse.Id }, facultyCourse);
-        }
+    //        return CreatedAtAction("GetFacultyCourse", new { id = facultyCourse.Id }, facultyCourse);
+    //    }
 
-        // DELETE: api/FacultyCourses/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteFacultyCourse(int id)
-        {
-            var facultyCourse = await _context.FacultyCourses.FindAsync(id);
-            if (facultyCourse == null)
-            {
-                return NotFound();
-            }
+    //    // DELETE: api/FacultyCourses/5
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteFacultyCourse(int id)
+    //    {
+    //        var facultyCourse = await _context.FacultyCourses.FindAsync(id);
+    //        if (facultyCourse == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _context.FacultyCourses.Remove(facultyCourse);
-            await _context.SaveChangesAsync();
+    //        _context.FacultyCourses.Remove(facultyCourse);
+    //        await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+    //        return NoContent();
+    //    }
 
-        private bool FacultyCourseExists(int id)
-        {
-            return _context.FacultyCourses.Any(e => e.Id == id);
-        }
+    //    private bool FacultyCourseExists(int id)
+    //    {
+    //        return _context.FacultyCourses.Any(e => e.Id == id);
+    //    }
     }
 }
