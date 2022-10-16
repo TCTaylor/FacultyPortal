@@ -8,6 +8,9 @@ namespace facultyportal_backend.Helpers
     {
         public AutoMapperProfile()
         {
+            //CreateMap<Accessor, AccessorsDto>().ReverseMap();
+            //CreateMap<Role, RolesDto>().ReverseMap();
+
             CreateMap<Course, CoursesDto>()
                 .ReverseMap()
                 .ForMember(dest => dest.Division,

@@ -5,7 +5,6 @@
         public int Id { get; set; }
         public int FacultyId { get; set; }
         public int CourseId { get; set; }
-        public int SectionId { get; set; }
         public string CourseSubject { get; set; }
         public string CourseNumber { get; set; }
         public string CourseTitle { get; set; }

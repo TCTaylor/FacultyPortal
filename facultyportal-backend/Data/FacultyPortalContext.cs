@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using facultyportal_backend.Models;
+﻿using facultyportal_backend.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+
 
 namespace facultyportal_backend.Data
 {
@@ -17,12 +15,14 @@ namespace facultyportal_backend.Data
         {
         }
 
+        public virtual DbSet<Accessor> Accessors { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Division> Divisions { get; set; } = null!;
         public virtual DbSet<Faculty> Faculties { get; set; } = null!;
         public virtual DbSet<FacultyCourse> FacultyCourses { get; set; } = null!;
         public virtual DbSet<FacultyQualification> FacultyQualifications { get; set; } = null!;
         public virtual DbSet<Qualification> Qualifications { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Section> Sections { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +34,37 @@ namespace facultyportal_backend.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Accessor>(entity =>
+            {
+                entity.ToTable("Accessor");
+
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.InstId).HasColumnName("Inst_Id");
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RoleId)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("Role_Id");
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("User_Name");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.Accessors)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Accessor_Role");
+            });
+
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.ToTable("Course");
@@ -127,8 +158,6 @@ namespace facultyportal_backend.Data
 
                 entity.Property(e => e.FacultyId).HasColumnName("Faculty_Id");
 
-                entity.Property(e => e.SectionId).HasColumnName("Section_Id");
-
                 entity.HasOne(d => d.Course)
                     .WithMany(p => p.FacultyCourses)
                     .HasForeignKey(d => d.CourseId)
@@ -140,12 +169,6 @@ namespace facultyportal_backend.Data
                     .HasForeignKey(d => d.FacultyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Faculty_Course_Faculty");
-
-                entity.HasOne(d => d.Section)
-                    .WithMany(p => p.FacultyCourses)
-                    .HasForeignKey(d => d.SectionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Faculty_Course_Section");
             });
 
             modelBuilder.Entity<FacultyQualification>(entity =>
@@ -175,6 +198,19 @@ namespace facultyportal_backend.Data
 
                 entity.Property(e => e.Credential)
                     .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Role>(entity =>
+            {
+                entity.ToTable("Role");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
             });
 
