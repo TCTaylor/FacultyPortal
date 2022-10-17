@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using facultyportal_backend.Application.DTOs;
 using facultyportal_backend.Data;
-using facultyportal_backend.Models;
-using facultyportal_backend.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,4 +1,4 @@
-﻿namespace facultyportal_backend.Models.DTOs
+﻿namespace facultyportal_backend.Application.DTOs
 {
     public class DivisionsDto
     {

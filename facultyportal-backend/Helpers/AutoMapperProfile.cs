@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using facultyportal_backend.Application.DTOs;
 using facultyportal_backend.Models;
-using facultyportal_backend.Models.DTOs;
 
 namespace facultyportal_backend.Helpers
 {
@@ -8,8 +8,7 @@ namespace facultyportal_backend.Helpers
     {
         public AutoMapperProfile()
         {
-            //CreateMap<Accessor, AccessorsDto>().ReverseMap();
-            //CreateMap<Role, RolesDto>().ReverseMap();
+            CreateMap<Accessor, AccessorsDto>().ReverseMap();
 
             CreateMap<Course, CoursesDto>()
                 .ReverseMap()
@@ -37,6 +36,8 @@ namespace facultyportal_backend.Helpers
             CreateMap<FacultyQualification, FacultyQualificationsDto>().ReverseMap();
 
             CreateMap<Qualification, QualificationsDto>().ReverseMap();
+
+            //CreateMap<Role, RolesDto>().ReverseMap();
 
             CreateMap<Section, SectionsDto>().ReverseMap();
         }

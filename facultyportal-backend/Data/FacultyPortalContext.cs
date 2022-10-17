@@ -1,7 +1,6 @@
 ﻿using facultyportal_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace facultyportal_backend.Data
 {
     public partial class FacultyPortalContext : DbContext
@@ -38,6 +37,11 @@ namespace facultyportal_backend.Data
             {
                 entity.ToTable("Accessor");
 
+                entity.Property(e => e.DivisionId)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("Division_Id");
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -57,6 +61,12 @@ namespace facultyportal_backend.Data
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .HasColumnName("User_Name");
+
+                entity.HasOne(d => d.Division)
+                    .WithMany(p => p.Accessors)
+                    .HasForeignKey(d => d.DivisionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Accessor_Division");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Accessors)
