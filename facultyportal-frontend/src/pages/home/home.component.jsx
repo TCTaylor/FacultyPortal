@@ -1,11 +1,35 @@
+import React, { useState, useEffect } from "react";
 
-function Home () {
-    return (
-        <div>
-            <h3>This is the Home page</h3>
-            <p>Replace this will all of the home component stuff.</p>
-        </div>
+import UserService from "../../services/user.service";
+
+const Home = () => {
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    UserService.getAccessor().then(
+      (response) => {
+        //setContent(response.data);
+      },
+      (error) => {
+        const errorContent =
+          (error.response && error.response.data) ||
+          error.message ||
+          error.toString();
+
+        //send errorContent to an error display component when this happens
+        setContent(errorContent);
+      }
     );
+  }, []);
+
+  return (
+    <div className="container">
+      <header className="jumbotron">
+        <h3>Welcome</h3>
+        <h3>{content}</h3>
+      </header>
+    </div>
+  );
 };
 
 export default Home;

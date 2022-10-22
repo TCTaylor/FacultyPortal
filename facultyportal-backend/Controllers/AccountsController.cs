@@ -14,17 +14,17 @@ namespace facultyportal_backend.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly FacultyPortalContext _context;
-        private readonly SignInManager<Accessor> _signInManager;
-        private readonly TokenService _tokenService;
+        //private readonly SignInManager<Accessor> _signInManager;
+        //private readonly TokenService _tokenService;
 
         public AccountsController(
-            FacultyPortalContext context,
-            SignInManager<Accessor> signInManager,
-            TokenService tokenService)
+            FacultyPortalContext context
+            //SignInManager<Accessor> signInManager
+            /*TokenService tokenService*/)
         {
             _context = context;
-            _signInManager = signInManager;
-            _tokenService = tokenService;
+            //_signInManager = signInManager;
+            //_tokenService = tokenService;
         }
 
         [HttpPost("sign-in")]
@@ -39,9 +39,10 @@ namespace facultyportal_backend.Controllers
                 accessor.RoleId == "None")
                 return Unauthorized();
 
-            var result = await _signInManager.CheckPasswordSignInAsync(accessor, signInDto.Password, false);
+            //var result = await _signInManager.CheckPasswordSignInAsync(accessor, signInDto.Password, false);
+            var result = accessor.Password == signInDto.Password;
 
-            if (result.Succeeded)
+            if (result)
             {
                 return await CreateAccessorAsync(accessor);
             }
@@ -50,11 +51,9 @@ namespace facultyportal_backend.Controllers
 
         }
 
-        //[Authorize]
         //[HttpGet]
-        //public async Task<ActionResult<AccessorsDto>> GetCurrentAccessor()
+        //public async Task<ActionResult<AccessorsDto>> GetAccessor(SignInDto tokenDto)
         //{
-        //    return CreateAccessorAsync(accessor);
         //}
 
         private async Task<AccessorsDto> CreateAccessorAsync(Accessor accessor)
@@ -64,6 +63,7 @@ namespace facultyportal_backend.Controllers
                 InstId = accessor.InstId,
                 RoleId = accessor.RoleId,
                 UserName = accessor.UserName,
+                DisplayName = accessor.UserName,
                 Email = accessor.Email,
                 Password = accessor.Password,
                 RoleTitle = accessor.Role.Title,
@@ -75,7 +75,8 @@ namespace facultyportal_backend.Controllers
                 IsReadOnly = accessor.RoleId.Equals("R"),
 
                 // Authentication token
-                Token = _tokenService.CreateToken(accessor),
+                //Token = _tokenService.CreateToken(accessor),
+                Token = "test123",
             };
         }
     }
