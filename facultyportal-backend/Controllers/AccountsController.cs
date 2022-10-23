@@ -28,7 +28,7 @@ namespace facultyportal_backend.Controllers
         }
 
         [HttpPost("sign-in")]
-        public async Task<ActionResult<AccessorsDto>> SignIn(SignInDto signInDto)
+        public async Task<ActionResult<AccessorsDto>> SignIn([FromBody] SignInDto signInDto)
         {
             var accessor = await _context.Accessors
                .Include(x => x.Role)

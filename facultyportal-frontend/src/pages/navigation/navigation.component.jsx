@@ -1,26 +1,30 @@
-import { Fragment } from 'react';
-import { Outlet, Link } from 'react-router-dom';
-import { ReactComponent as FPLogo } from '../../assets/apple-black-shape-svgrepo-com.svg';
+import { Fragment } from "react";
+import { Outlet, Link } from "react-router-dom";
+import { ReactComponent as FPLogo } from "../../assets/apple-black-shape-svgrepo-com.svg";
 
 function Navigation() {
-    return (
-      <Fragment>
-        <div className='navigation'>
-          <Link className='logo-container' to='/'>
-            <FPLogo className='logo'/>
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    console.log("signed out! Token is now " + localStorage.getItem("token"))
+  };
+  return (
+    <Fragment>
+      <div className="navigation">
+        <Link className="logo-container" to="/">
+          <FPLogo className="logo" />
+        </Link>
+        <div className="nav-links-container">
+          <Link className="nav-link" to="/faculty-courses">
+            Courses
           </Link>
-          <div className='nav-links-container'>
-            <Link className='nav-link' to='/faculty-courses'>
-              Courses
-            </Link>
-            <Link className='nav-link' to='/sign-in'>
-              Sign In
-            </Link>
-          </div>
+          <button className="sign-out" onClick={handleSignOut}>
+            Sign Out
+          </button>
         </div>
-        <Outlet />
-      </Fragment>
-    );
-};
+      </div>
+      <Outlet />
+    </Fragment>
+  );
+}
 
 export default Navigation;

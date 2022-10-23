@@ -5,17 +5,13 @@ import Home from "./pages/home/home.component";
 import SignIn from "./pages/sign-in/sign-in.component";
 import FacultyCourses from "./pages/faculty-courses/faculty-courses.component";
 import CourseDetails from "./pages/course-details/course-details.component";
-import useToken from "./services/use-token";
 
 function App() {
-  const { token, setToken } = useToken();
-
-  // Display Sign In component if there is no token
+  const token = localStorage.getItem("token");
   if (!token) {
-    console.log("no token, going to Sign In")
-    return <SignIn setToken={setToken} />;
+    console.log("no token, going to Sign In component");
+    return <SignIn />;
   }
-
   return (
     <div className="App">
       <Routes>
