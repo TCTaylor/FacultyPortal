@@ -1,16 +1,16 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "../../auth-provider";
-import axios from "axios";
-// https://www.bezkoder.com/react-hooks-redux-login-registration-example/
-// https://www.digitalocean.com/community/tutorials/how-to-add-login-authentication-to-react-applications
-// https://www.youtube.com/watch?v=X3qyxo_UTR4&list=RDCMUCY38RvRIxYODO4penyxUwTg&index=2
-
-const API_BASE_URL = "https://localhost:7078/api";
+import React, { useContext, useEffect, useState } from "react";
+import UserContext from "../../context/user-context";
+import { useNavigate } from "react-router-dom";
+import { signIn } from "../../services/auth-service";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -20,32 +20,19 @@ function SignIn() {
     setPassword(e.target.value);
   };
 
-  const { setAuth } = useContext(AuthContext);
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await axios.post(
-        API_BASE_URL + "/Accounts" + "/sign-in",
-        {
-          email,
-          password,
-        }
-      );
-      //console.log(JSON.stringify(response?.data));
-      const token = response?.data?.token;
-      const role = response?.data?.roleId;
-      //console.log("in signIn, token is: " + token);
-      setAuth({ email, password, role, token });
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-    } catch (error) {
-      console.log(error);
-    }
-    setEmail("");
-    setPassword("");
-    setLoading(false);
-    alert("You have signed in! Reload to go to home page.")
+    const user = await signIn(email, password);
+    setUser(user);
+    setSuccess(true);
   };
+
+  useEffect(() => {
+    if (success) {
+      navigate("/");
+    }
+  }, [success]);
 
   if (loading) {
     return <p>Loading...</p>;

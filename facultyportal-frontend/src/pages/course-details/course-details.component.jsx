@@ -20,12 +20,12 @@ function CourseDetails() {
       .then((response) => {
         setCourse(response.data);
         setIsLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         setError(true);
         setIsLoading(false);
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 

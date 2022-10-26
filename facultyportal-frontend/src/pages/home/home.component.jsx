@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-
-import UserService from "../../user.service";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../../context/user-context";
 
 const Home = () => {
-  const [content, setContent] = useState("");
+  const { user } = useContext(UserContext);
+
+  const content = JSON.stringify(user);
+  const token = localStorage.getItem("token");
 
   // useEffect(() => {
   //   UserService.getAccessor().then(
@@ -25,7 +27,11 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>Welcome</h3>
+        <h1>Welcome</h1>
+        <h2>ze user context</h2>
+        <h3>{content}</h3>
+        <h2>ze token</h2>
+        <h3>{token}</h3>
       </header>
     </div>
   );

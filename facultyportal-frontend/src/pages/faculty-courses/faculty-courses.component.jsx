@@ -20,7 +20,7 @@ function FacultyCourses() {
       .then((response) => {
         setCourses(response.data);
         setIsLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         setError(true);

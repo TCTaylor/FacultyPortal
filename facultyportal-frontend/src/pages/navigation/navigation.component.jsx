@@ -1,12 +1,26 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as FPLogo } from "../../assets/apple-black-shape-svgrepo-com.svg";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "../../services/auth-service";
+import { useEffect, useState } from "react";
 
 function Navigation() {
+  const [signedIn, setSignedIn] = useState(true);
+  const navigate = useNavigate();
+
   const handleSignOut = () => {
-    localStorage.removeItem("token");
-    console.log("signed out! Token is now " + localStorage.getItem("token"))
+    signOut();
+    setSignedIn(false);
   };
+
+  useEffect(() => {
+    if (!signedIn) {
+      console.log("signed out, going to Sign Out component");
+      navigate("/sign-in");
+    }
+  }, [signedIn]);
+
   return (
     <Fragment>
       <div className="navigation">
