@@ -60,6 +60,7 @@ namespace facultyportal_backend.Controllers
         {
             return new AccessorsDto
             {
+                Id = accessor.Id,
                 InstId = accessor.InstId,
                 RoleId = accessor.RoleId,
                 UserName = accessor.UserName,

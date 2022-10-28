@@ -16,7 +16,6 @@ function Navigation() {
 
   useEffect(() => {
     if (!signedIn) {
-      console.log("signed out, going to Sign Out component");
       navigate("/sign-in");
     }
   }, [signedIn]);
@@ -28,7 +27,7 @@ function Navigation() {
           <FPLogo className="logo" />
         </Link>
         <div className="nav-links-container">
-          <Link className="nav-link" to="/faculty-courses">
+          <Link className="nav-link" to={"/faculty-courses"}>
             Courses
           </Link>
           <button className="sign-out" onClick={handleSignOut}>

@@ -2,13 +2,13 @@ import "./card.styles.css";
 import { Link } from "react-router-dom";
 
 function Card({ course }) {
-  const { id, subject, number, title } = course;
+  const { courseId, courseSubject, courseNumber, courseTitle } = course;
 
   return (
     <div className="card-container">
-      <h2>{subject + " " + number}</h2>
-      <p>{title}</p>
-      <Link to={"/course-details/" + id}>
+      <h2>{courseSubject + " " + courseNumber}</h2>
+      <p>{courseTitle}</p>
+      <Link to={"/course-details/" + courseId}>
         <button>Details</button>
       </Link>
     </div>

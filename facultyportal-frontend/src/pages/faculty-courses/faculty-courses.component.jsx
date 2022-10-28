@@ -7,18 +7,20 @@ const API_BASE_URL = "https://localhost:7078/api";
 
 function FacultyCourses() {
   const [isLoading, setIsLoading] = useState(true);
-  const [courses, setCourses] = useState([]);
+  const [facultyCourses, setFacultyCourses] = useState([]);
   const [searchField, setSearchField] = useState(""); // [value, setValue]
-  const [filteredCourses, setFilteredCourses] = useState(courses);
+  const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(false);
+
+  const instId = JSON.parse(localStorage.getItem("token"))["instId"];
 
   // Will call the FacultyCourses controller
   useEffect(() => {
     axios
       //.get("https://jsonplaceholder.typicode.com/users")
-      .get(API_BASE_URL + "/Courses")
+      .get(API_BASE_URL + "/FacultyCourses/" + instId)
       .then((response) => {
-        setCourses(response.data);
+        setFacultyCourses(response.data);
         setIsLoading(false);
         // console.log(response.data);
       })
@@ -30,12 +32,12 @@ function FacultyCourses() {
   }, []);
 
   useEffect(() => {
-    const newFilteredCourses = courses.filter((course) => {
-      return course.title.toLocaleLowerCase().includes(searchField);
+    const newFilteredCourses = facultyCourses.filter((facultyCourse) => {
+      return facultyCourse.courseTitle.toLocaleLowerCase().includes(searchField);
     });
 
     setFilteredCourses(newFilteredCourses);
-  }, [courses, searchField]);
+  }, [facultyCourses, searchField]);
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
