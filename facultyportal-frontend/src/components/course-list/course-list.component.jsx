@@ -1,6 +1,7 @@
-import "./course-list.styles.css";
 import React from "react";
 import Card from "../card/card-component";
+
+import "./course-list.styles.css";
 
 function CourseList({ courses }) {
 

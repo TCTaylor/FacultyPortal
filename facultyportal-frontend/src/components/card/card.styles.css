@@ -4,7 +4,8 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  background-color: #95dada;
+  height: 250px;
+  background-color: rgb(60, 165, 165);
   border: 1px solid grey;
   border-radius: 5px;
   padding: 25px;
@@ -13,6 +14,7 @@
   backface-visibility: hidden;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
+  font-family: Arial, Helvetica, sans-serif
 }
 
 .card-container:hover {

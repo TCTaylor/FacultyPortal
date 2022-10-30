@@ -1,12 +1,13 @@
 import CourseList from "../../components/course-list/course-list.component";
 import SearchBox from "../../components/search-box/search-box.component";
+import Loading from "../../components/loading/loading.component";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 const API_BASE_URL = "https://localhost:7078/api";
 
 function FacultyCourses() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [facultyCourses, setFacultyCourses] = useState([]);
   const [searchField, setSearchField] = useState(""); // [value, setValue]
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
@@ -21,12 +22,12 @@ function FacultyCourses() {
       .get(API_BASE_URL + "/FacultyCourses/" + instId)
       .then((response) => {
         setFacultyCourses(response.data);
-        setIsLoading(false);
+        setLoading(false);
         // console.log(response.data);
       })
       .catch((error) => {
         setError(true);
-        setIsLoading(false);
+        setLoading(false);
         console.log(error);
       });
   }, []);
@@ -44,8 +45,8 @@ function FacultyCourses() {
     setSearchField(searchFieldString);
   };
 
-  if (isLoading) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return <Loading />
   }
 
   if (error) {

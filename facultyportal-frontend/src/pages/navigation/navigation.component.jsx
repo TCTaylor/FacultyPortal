@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
 
+import "./navigation.styles.css";
+
 function Navigation() {
   const [signedIn, setSignedIn] = useState(true);
   const navigate = useNavigate();
@@ -23,14 +25,21 @@ function Navigation() {
   return (
     <Fragment>
       <div className="navigation">
-        <Link className="logo-container" to="/">
-          <FPLogo className="logo" />
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to={"/faculty-courses"}>
+
+        <div className="logo-container">
+          <Link to="/">
+            <FPLogo className="logo" />
+          </Link>
+        </div>
+
+        <div className="nav-link">
+          <Link to={"/faculty-courses"}>
             Courses
           </Link>
-          <button className="sign-out" onClick={handleSignOut}>
+        </div>
+
+        <div className="button-sign-out">
+          <button onClick={handleSignOut}>
             Sign Out
           </button>
         </div>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/user-context";
+import Loading from "../../components/loading/loading.component";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth-service";
 
@@ -35,7 +36,7 @@ function SignIn() {
   }, [success]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />
   }
 
   return (
