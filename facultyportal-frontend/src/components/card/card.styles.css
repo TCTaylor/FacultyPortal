@@ -4,8 +4,8 @@
 .card-container {
   display: flex;
   flex-direction: column;
-  height: 250px;
-  background-color: rgb(60, 165, 165);
+  height: 200px;
+  background-color: rgb(69, 187, 187);
   border: 1px solid grey;
   border-radius: 5px;
   padding: 25px;

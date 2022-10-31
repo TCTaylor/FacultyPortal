@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserContext from "../../context/user-context";
 import Loading from "../../components/loading/loading.component";
+import { ReactComponent as FPLogo } from "../../assets/books-stack-of-three-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth-service";
+
+import "./sign-in.styles.css";
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -36,39 +39,48 @@ function SignIn() {
   }, [success]);
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
-    <div>
-      <div>
-        <form onSubmit={handleSignIn}>
-          <div>
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              autoComplete="off"
-              value={email}
-              onChange={onChangeEmail}
-              required
-            />
-          </div>
-          <div>
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={onChangePassword}
-              required
-            />
-          </div>
-          <div>
-            <button type="submit">Sign In</button>
-          </div>
-        </form>
-      </div>
+    <div className="sign-in-wrapper">
+      <form className="form-container" onSubmit={handleSignIn}>
+        <div className="sign-in-header">
+          <FPLogo className="sign-in-logo" />
+          <h1 className="sign-in-title">Faculty Portal</h1>
+        </div>
+        <h1>Sign In</h1>
+        <div className="username">
+          <label>Email</label>
+          <br />
+          <input
+            type="text"
+            name="email"
+            autoComplete="off"
+            value={email}
+            onChange={onChangeEmail}
+            required
+          />
+        </div>
+        <div className="password">
+          <label>Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChangePassword}
+            required
+          />
+        </div>
+        <div className="remember-me">
+          <input type="checkbox"></input>
+          <label>Remember me?</label>
+        </div>
+        <div className="sign-in-btn">
+          <button type="submit">Sign In</button>
+        </div>
+      </form>
     </div>
   );
 }

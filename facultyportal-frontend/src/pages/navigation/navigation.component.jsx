@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { ReactComponent as FPLogo } from "../../assets/apple-black-shape-svgrepo-com.svg";
+import { ReactComponent as FPLogo } from "../../assets/books-stack-of-three-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
@@ -8,40 +8,44 @@ import { useEffect, useState } from "react";
 import "./navigation.styles.css";
 
 function Navigation() {
-  const [signedIn, setSignedIn] = useState(true);
+  const [signingOut, setSigningOut] = useState(false);
   const navigate = useNavigate();
 
   const handleSignOut = () => {
-    signOut();
-    setSignedIn(false);
+    setSigningOut(true);
   };
 
   useEffect(() => {
-    if (!signedIn) {
+    if (signingOut) {
+      signOut();
       navigate("/sign-in");
     }
-  }, [signedIn]);
+  }, [signingOut]);
 
   return (
     <Fragment>
-      <div className="navigation">
-
-        <div className="logo-container">
+      <div className="navigation-container">
+        <div className="navigation">
           <Link to="/">
-            <FPLogo className="logo" />
+            <div className="logo-container">
+              <FPLogo className="logo" />
+            </div>
           </Link>
-        </div>
-
-        <div className="nav-link">
-          <Link to={"/faculty-courses"}>
-            Courses
+          <Link to={"/courses"}>
+            <div className="nav-link-container">
+              <div className="nav-link">Courses</div>
+            </div>
           </Link>
-        </div>
 
-        <div className="button-sign-out">
-          <button onClick={handleSignOut}>
-            Sign Out
-          </button>
+          <div className="account-dropdown">
+            <div className="display-name">User Name</div>
+            <div className="dropdown-content">
+              <Link onClick={handleSignOut}>
+                <p>Sign Out</p>
+              </Link>
+            </div>
+          </div>
+          
         </div>
       </div>
       <Outlet />

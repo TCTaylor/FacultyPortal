@@ -8,7 +8,7 @@ function Card({ course }) {
     <div className="card-container">
       <h2>{courseSubject + " " + courseNumber}</h2>
       <p>{courseTitle}</p>
-      <Link to={"/course-details/" + courseId}>
+      <Link to={"/courses/" + courseId}>
         <button className="">Details</button>
       </Link>
     </div>
