@@ -1,7 +1,10 @@
 import CourseList from "../../components/course-list/course-list.component";
 import SearchBox from "../../components/search-box/search-box.component";
 import Loading from "../../components/loading/loading.component";
+
 import { useState, useEffect } from "react";
+import useAuth from "../../hooks/use-auth";
+
 import axios from "axios";
 
 const API_BASE_URL = "https://localhost:7078/api";
@@ -13,7 +16,7 @@ function FacultyCourses() {
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(false);
 
-  const instId = JSON.parse(localStorage.getItem("token"))["instId"];
+  const { instId } = useAuth();
 
   // Will call the FacultyCourses controller
   useEffect(() => {
@@ -34,7 +37,9 @@ function FacultyCourses() {
 
   useEffect(() => {
     const newFilteredCourses = facultyCourses.filter((facultyCourse) => {
-      return facultyCourse.courseTitle.toLocaleLowerCase().includes(searchField);
+      return facultyCourse.courseTitle
+        .toLocaleLowerCase()
+        .includes(searchField);
     });
 
     setFilteredCourses(newFilteredCourses);
@@ -46,7 +51,7 @@ function FacultyCourses() {
   };
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (error) {

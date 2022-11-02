@@ -4,11 +4,13 @@ import { ReactComponent as FPLogo } from "../../assets/books-stack-of-three-svgr
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/use-auth";
 
 import "./navigation.styles.css";
 
 function Navigation() {
   const [signingOut, setSigningOut] = useState(false);
+  const { displayName, isAdmin, isEditor } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -36,16 +38,24 @@ function Navigation() {
               <div className="nav-link">Courses</div>
             </div>
           </Link>
-
+          {(isAdmin || isEditor) && (
+            <Link to={"/"}>
+              <div className="nav-link-container">
+                <div className="nav-link">Users</div>
+              </div>
+            </Link>
+          )}
           <div className="account-dropdown">
-            <div className="display-name">User Name</div>
+            <div className="display-name">{displayName}</div>
             <div className="dropdown-content">
+              <Link to="/">
+                <p>Profile</p>
+              </Link>
               <Link onClick={handleSignOut}>
                 <p>Sign Out</p>
               </Link>
             </div>
           </div>
-          
         </div>
       </div>
       <Outlet />

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../../context/user-context";
+import useAuth from "../../hooks/use-auth";
 
 const Home = () => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
-  const content = JSON.stringify(user);
-  const token = localStorage.getItem("token");
+  const { userName } = useAuth();
 
   // useEffect(() => {
   //   UserService.getAccessor().then(
@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h1>Welcome</h1>
+        <h1>Welcome, {userName}</h1>
       </header>
     </div>
   );

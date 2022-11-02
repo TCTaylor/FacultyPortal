@@ -9,6 +9,7 @@ const signIn = async (email, password) => {
       password,
     });
     localStorage.setItem("token", JSON.stringify(response.data));
+    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);
