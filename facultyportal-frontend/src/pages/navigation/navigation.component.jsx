@@ -26,35 +26,73 @@ function Navigation() {
 
   return (
     <Fragment>
-      <div className="navigation-container">
-        <div className="navigation">
+      <div className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container-fluid">
           <Link to="/">
-            <div className="logo-container">
+            <div className="navbar-brand">
               <FPLogo className="logo" />
             </div>
           </Link>
-          <Link to={"/courses"}>
-            <div className="nav-link-container">
-              <div className="nav-link">Courses</div>
-            </div>
-          </Link>
-          {(isAdmin || isEditor) && (
-            <Link to={"/"}>
-              <div className="nav-link-container">
-                <div className="nav-link">Users</div>
-              </div>
-            </Link>
-          )}
-          <div className="account-dropdown">
-            <div className="display-name">{displayName}</div>
-            <div className="dropdown-content">
-              <Link to="/">
-                <p>Profile</p>
-              </Link>
-              <Link onClick={handleSignOut}>
-                <p>Sign Out</p>
-              </Link>
-            </div>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link" to={"/courses"}>
+                <i className="bi bi-journals"> </i>
+                  Courses
+                </Link>
+              </li>
+              {(isAdmin || isEditor) && (
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/"}>
+                    <i className="bi bi-people-fill"></i>
+                    Users
+                  </Link>
+                </li>
+              )}
+              <li className="nav-item dropdown">
+                <Link
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {/* <img src="" alt="User profile picture" width="10" height="10"></img> */}
+                  <i className="bi bi-person-circle"> </i>
+                  {displayName}
+                </Link>
+                <ul
+                  className="dropdown-menu"
+                  style={{ margin: 0 }} // Fix Popper warning
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <li>
+                    <Link className="dropdown-item" to="/profile">
+                      <i className="bi bi-person-circle"> </i>
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" onClick={handleSignOut}>
+                      <i className="bi bi-box-arrow-right"> </i>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

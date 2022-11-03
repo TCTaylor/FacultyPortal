@@ -44,7 +44,7 @@ function SignIn() {
 
   return (
     <div className="sign-in-wrapper">
-      <form className="form-container" onSubmit={handleSignIn}>
+      <form className="" onSubmit={handleSignIn}>
         <div className="sign-in-header">
           <FPLogo className="sign-in-logo" />
           <h1 className="sign-in-title">Faculty Portal</h1>

@@ -1,4 +1,9 @@
-.navigation-container {
+.logo {
+  height: 60px;
+  width: 100px;
+}
+
+/* .navigation-container {
   height: 65px;
   width: 100%;
   background-color: rgb(69, 187, 187);
@@ -72,4 +77,4 @@
 
 .account-dropdown:hover .dropdown-content {
   display: block;
-}
+} */

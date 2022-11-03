@@ -4,12 +4,9 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, } from "react-rout
 import Navigation from "./pages/navigation/navigation.component";
 import Home from "./pages/home/home.component";
 import SignIn from "./pages/sign-in/sign-in.component";
+import Profile from "./pages/profile/profile.component";
 import FacultyCourses from "./pages/faculty-courses/faculty-courses.component";
 import CourseDetails from "./pages/course-details/course-details.component";
-
-//import "bootstrap/dist/css/bootstrap.min.css";
-//import "bootstrap/dist/js/bootstrap.min.js";
-// import 'semantic-ui-css/semantic.min.css'
 
 function App() {
   const token = localStorage.getItem("token");
@@ -28,6 +25,7 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/courses" element={<FacultyCourses />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
         </Route>
