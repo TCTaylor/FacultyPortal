@@ -1,5 +1,6 @@
 ﻿using facultyportal_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using facultyportal_backend.Application.DTOs;
 
 namespace facultyportal_backend.Data
 {
@@ -17,7 +18,7 @@ namespace facultyportal_backend.Data
         public virtual DbSet<Accessor> Accessors { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<Division> Divisions { get; set; } = null!;
-        public virtual DbSet<Faculty> Faculties { get; set; } = null!;
+        public virtual DbSet<Faculty> Faculty { get; set; } = null!;
         public virtual DbSet<FacultyCourse> FacultyCourses { get; set; } = null!;
         public virtual DbSet<FacultyQualification> FacultyQualifications { get; set; } = null!;
         public virtual DbSet<Qualification> Qualifications { get; set; } = null!;
@@ -245,5 +246,7 @@ namespace facultyportal_backend.Data
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<facultyportal_backend.Application.DTOs.FacultyDto> FacultyDto { get; set; }
     }
 }
