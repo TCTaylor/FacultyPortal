@@ -196,7 +196,7 @@ namespace facultyportal_backend.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Faculty_Qualification_Faculty");
 
-                entity.HasOne(d => d.Qual)
+                entity.HasOne(d => d.Qualification)
                     .WithMany(p => p.FacultyQualifications)
                     .HasForeignKey(d => d.QualId)
                     .OnDelete(DeleteBehavior.ClientSetNull)

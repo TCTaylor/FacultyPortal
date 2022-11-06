@@ -1,0 +1,11 @@
+.profile-img {
+    width: 250px;
+}
+
+.btn-edit {
+    display: none;
+}
+
+.profile-img:hover .btn-edit {
+    display: block;
+}

@@ -1,12 +1,12 @@
 import "./search-box.styles.css";
 
-function SearchBox({ onChangeHandler }) {
+function SearchBox({ onChangeHandler, placeholder }) {
   return (
     <div>
       <input
         className="search-box"
         type="search"
-        placeholder="Search courses"
+        placeholder={placeholder}
         onChange={onChangeHandler}
       />
     </div>

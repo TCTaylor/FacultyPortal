@@ -1,16 +1,15 @@
-import DetailsList from "../../components/details-list/details-list.component";
+import Loading from "../../../components/loading/loading.component";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
 import axios from "axios";
 
 const API_BASE_URL = "https://localhost:7078/api";
 
-function CourseDetails() {
+function FacultyForm() {
   const { id } = useParams();
 
-  const [course, setCourse] = useState([]);
+  const [formValues, setFormValues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -18,11 +17,11 @@ function CourseDetails() {
   useEffect(() => {
     axios
       //.get("https://jsonplaceholder.typicode.com/users")
-      .get(API_BASE_URL + "/Courses/" + id)
+      .get(API_BASE_URL + "/Faculty/" + id)
       .then((response) => {
-        setCourse(response.data);
+        setFormValues(response.data);
         setLoading(false);
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         setError(true);
@@ -41,12 +40,9 @@ function CourseDetails() {
 
   return (
     <div>
-      <h3>This is the Course Details page</h3>
-      <div key={course[0].id}>
-        <DetailsList course={course[0]} />
-      </div>
+      <input title="qualifications" placeholder={formValues[0].qualifications[0]} />
     </div>
   );
 }
 
-export default CourseDetails;
+export default FacultyForm;

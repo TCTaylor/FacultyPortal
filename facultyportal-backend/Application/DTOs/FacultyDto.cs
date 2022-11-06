@@ -8,7 +8,8 @@
         public string LastName { get; set; } = null!;
         public string? MidInit { get; set; }
         public string? Suffix { get; set; }
-        public List<QualificationsDto>? Qualifications { get; set; }
+        //public string Credential { get; set; }
+        public List<QualificationsDto>? Qualifications { get; set; } = new List<QualificationsDto>();
 
     }
 }

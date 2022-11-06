@@ -58,13 +58,16 @@ namespace facultyportal_backend.Controllers
 
         private async Task<AccessorsDto> CreateAccessorAsync(Accessor accessor)
         {
+            var faculty = await _context.Faculty
+                .FirstOrDefaultAsync(x => x.InstId == accessor.InstId);
+
             return new AccessorsDto
             {
                 Id = accessor.Id,
                 InstId = accessor.InstId,
                 RoleId = accessor.RoleId,
                 UserName = accessor.UserName,
-                DisplayName = accessor.UserName,
+                DisplayName = (faculty != null) ? faculty.FirstName : accessor.UserName,
                 Email = accessor.Email,
                 Password = accessor.Password,
                 RoleTitle = accessor.Role.Title,

@@ -24,9 +24,33 @@ namespace facultyportal_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FacultyDto>>> GetFaculty()
         {
-            var faculty = await _context.Courses
+            var faculty = await _context.Faculty
+                //.Include(x => x.FacultyQualifications)
+                //.ThenInclude(fq => fq.Qualification)
                 .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            //var qualifications = await _context.Qualifications
+            //    .Include(x => x.FacultyQualifications)
+            //    .ProjectTo<QualificationsDto>(_mapper.ConfigurationProvider)
+            //    .ToListAsync();
+
+            //var facultyList = new List<FacultyDto>();
+
+            //var facultyDto = new FacultyDto();
+
+            //for (var x = 0; x < faculty.Count; x++)
+            //{
+            //    facultyDto.Id = faculty[x].Id;
+            //    facultyDto.InstId = faculty[x].InstId;
+            //    facultyDto.FirstName = faculty[x].FirstName;
+            //    facultyDto.LastName = faculty[x].LastName;
+            //    facultyDto.MidInit = faculty[x].MidInit;
+            //    facultyDto.Suffix = faculty[x].Suffix;
+            //    facultyDto.Qualifications = qualifications;
+
+            //    facultyList.Add(facultyDto);
+            //}
 
             return Ok(faculty);
         }
@@ -36,11 +60,30 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<FacultyDto>> GetFaculty(int id)
         {
             var faculty = await _context.Faculty
-                .Where(c => c.Id == id)
+                //.Include(x => x.FacultyQualifications)
+                //.ThenInclude(fq => fq.Qualification)
                 .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
+                .Where(x => x.Id == id)
                 .ToListAsync();
 
-            if (!faculty.Any()) return NotFound();
+            //var qualifications = await _context.Qualifications
+            //    .Include(x => x.FacultyQualifications
+            //                   .Where(x => x.FacultyId == id))
+            //    .ProjectTo<QualificationsDto>(_mapper.ConfigurationProvider)
+            //    .ToListAsync();
+
+            //var facultyDto = new FacultyDto();
+
+            //for (var x = 0; x < faculty.Count; x++)
+            //{
+            //    facultyDto.Id = faculty[x].Id;
+            //    facultyDto.InstId = faculty[x].InstId;
+            //    facultyDto.FirstName = faculty[x].FirstName;
+            //    facultyDto.LastName = faculty[x].LastName;
+            //    facultyDto.MidInit = faculty[x].MidInit;
+            //    facultyDto.Suffix = faculty[x].Suffix;
+            //    facultyDto.Qualifications = qualifications;
+            //}
 
             return Ok(faculty);
         }

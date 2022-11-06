@@ -1,6 +1,6 @@
-import FacultyList from "../../../components/faculty-maint/faculty-maint.component";
-import SearchBox from "../../components/search-box/search-box.component";
-import Loading from "../../components/loading/loading.component";
+import FacultyList from "../../../components/admin/faculty-list/faculty-list.component";
+import SearchBox from "../../../components/search-box/search-box.component";
+import Loading from "../../../components/loading/loading.component";
 
 import { useState, useEffect } from "react";
 
@@ -22,7 +22,7 @@ function FacultyMaintenance() {
       .then((response) => {
         setFaculty(response.data);
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         setError(true);
@@ -31,14 +31,15 @@ function FacultyMaintenance() {
       });
   }, []);
 
-  // TODO - search by last name, first name, or ID
+  // // TODO - search by last name, first name, or ID
   useEffect(() => {
     const newFilteredFaculty = faculty.filter((fac) => {
       return fac.lastName.toLocaleLowerCase().includes(searchField);
     });
 
+    // console.log(filteredFaculty);
     setFilteredFaculty(newFilteredFaculty);
-  }, [facultyCourses, searchField]);
+  }, [faculty, searchField]);
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();

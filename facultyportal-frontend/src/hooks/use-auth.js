@@ -1,8 +1,9 @@
 const useAuth = () => {
+  // console.log(localStorage.getItem("token"));
   const token = localStorage.getItem("token");
   let isAdmin = false;
   let isEditor = false;
-  let status = "ReadOnly";
+  let isReadOnly = true;
 
   if (token) {
     const userInfo = JSON.parse(token);
@@ -10,20 +11,19 @@ const useAuth = () => {
 
     isAdmin = userInfo["isAdmin"];
     isEditor = userInfo["isEditor"];
+    isEditor = userInfo["isReadOnly"];
+    // isReadOnly = userInfo["isReadOnly"];
 
-    if (isAdmin) status = "Admin";
-    if (isEditor) status = "Editor";
-
-    // console.log(instId, userName, displayName, status, isAdmin, isEditor);
+    // console.log(instId, userName, displayName, isAdmin, isEditor, isReadOnly);
 
     return {
       instId,
       role,
       userName,
       displayName,
-      status,
       isAdmin,
       isEditor,
+      isReadOnly,
     };
   }
 

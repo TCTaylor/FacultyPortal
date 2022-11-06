@@ -7,6 +7,6 @@
         public int QualId { get; set; }
 
         public virtual Faculty Faculty { get; set; } = null!;
-        public virtual Qualification Qual { get; set; } = null!;
+        public virtual Qualification Qualification { get; set; } = null!;
     }
 }

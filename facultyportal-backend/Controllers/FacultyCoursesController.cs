@@ -22,7 +22,7 @@ namespace facultyportal_backend.Controllers
 
         // GET: api/FacultyCourses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<FacultyCoursesDto>>> GetFacultyCourse()
+        public async Task<ActionResult<IEnumerable<FacultyCoursesDto>>> GetFacultyCourses()
         {
             var facultyCourses = await _context.FacultyCourses
                 .ProjectTo<FacultyCoursesDto>(_mapper.ConfigurationProvider)
@@ -31,21 +31,6 @@ namespace facultyportal_backend.Controllers
             return Ok(facultyCourses);
         }
 
-        //// GET: api/FacultyCourses/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCourse(int id)
-        //{
-        //    var facultyCourses = await _context.FacultyCourses
-        //        .Where(c => c.Id == id)
-        //        .ProjectTo<FacultyCoursesDto>(_mapper.ConfigurationProvider)
-        //        .ToListAsync();
-
-        //    if (!facultyCourses.Any()) return NotFound();
-
-        //    return Ok(facultyCourses);
-        //}
-
-        // GET: api/FacultyCourses/5
         [HttpGet("{instId}")]
         public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCoursesByFaculty(int instId)
         {
