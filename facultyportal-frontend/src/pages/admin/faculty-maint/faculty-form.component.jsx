@@ -1,4 +1,5 @@
 import Loading from "../../../components/loading/loading.component";
+import Error from "../../../components/error/error.component";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -11,7 +12,7 @@ function FacultyForm() {
 
   const [formValues, setFormValues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   // Will call Courses controller
   useEffect(() => {
@@ -24,7 +25,7 @@ function FacultyForm() {
         console.log(response.data);
       })
       .catch((error) => {
-        setError(true);
+        setError(error);
         setLoading(false);
         // console.log(error);
       });
@@ -35,7 +36,7 @@ function FacultyForm() {
   }
 
   if (error) {
-    return <p>An error occurred.</p>;
+    return <Error error={error.response.status}/>;
   }
 
   return (

@@ -1,6 +1,7 @@
 import CourseMaintList from "../../../components/admin/course-list/course-list.component";
 import SearchBox from "../../../components/search-box/search-box.component";
 import Loading from "../../../components/loading/loading.component";
+import Error from "../../../components/error/error.component";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -14,7 +15,7 @@ function CourseMaintenance() {
   const [facultyCourses, setFacultyCourses] = useState([]);
   const [searchField, setSearchField] = useState(""); // [value, setValue]
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const { instId } = useParams();
 
@@ -29,7 +30,7 @@ function CourseMaintenance() {
         // console.log(response.data);
       })
       .catch((error) => {
-        setError(true);
+        setError(error);
         setLoading(false);
         console.log(error);
       });
@@ -55,7 +56,7 @@ function CourseMaintenance() {
   }
 
   if (error) {
-    return <p>An error occurred.</p>;
+    return <Error error={error.response.status} />;
   }
 
   return (

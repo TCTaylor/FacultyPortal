@@ -1,4 +1,5 @@
 import DetailsList from "../../components/details-list/details-list.component";
+import Error from "../../components/error/error.component";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -12,7 +13,7 @@ function CourseDetails() {
 
   const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   // Will call Courses controller
   useEffect(() => {
@@ -25,9 +26,9 @@ function CourseDetails() {
         // console.log(response.data);
       })
       .catch((error) => {
-        setError(true);
+        setError(error);
         setLoading(false);
-        // console.log(error);
+        console.log(error);
       });
   }, []);
 
@@ -36,7 +37,7 @@ function CourseDetails() {
   }
 
   if (error) {
-    return <p>An error occurred.</p>;
+    return <Error error={error.response.status} />;
   }
 
   return (

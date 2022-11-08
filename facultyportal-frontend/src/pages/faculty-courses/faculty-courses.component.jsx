@@ -1,6 +1,7 @@
 import CourseList from "../../components/course-list/course-list.component";
 import SearchBox from "../../components/search-box/search-box.component";
 import Loading from "../../components/loading/loading.component";
+import Error from "../../components/error/error.component";
 
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/use-auth";
@@ -14,7 +15,7 @@ function FacultyCourses() {
   const [facultyCourses, setFacultyCourses] = useState([]);
   const [searchField, setSearchField] = useState(""); // [value, setValue]
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const { instId } = useAuth();
 
@@ -29,9 +30,9 @@ function FacultyCourses() {
         // console.log(response.data);
       })
       .catch((error) => {
-        setError(true);
+        setError(error);
         setLoading(false);
-        console.log(error);
+        console.log(error.response.status);
       });
   }, []);
 
@@ -55,7 +56,7 @@ function FacultyCourses() {
   }
 
   if (error) {
-    return <p>An error occurred.</p>;
+    return <Error error={error.response.status}/>;
   }
 
   return (
