@@ -18,7 +18,6 @@ function CourseDetails() {
   // Will call Courses controller
   useEffect(() => {
     axios
-      //.get("https://jsonplaceholder.typicode.com/users")
       .get(API_BASE_URL + "/Courses/" + id)
       .then((response) => {
         setCourse(response.data);

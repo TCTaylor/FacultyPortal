@@ -25,10 +25,8 @@ const Home = () => {
   // }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h1>Welcome, {userName}</h1>
-      </header>
+    <div className="container mt-4">
+      <h1>Welcome, {userName}</h1>
     </div>
   );
 };

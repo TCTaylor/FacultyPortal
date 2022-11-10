@@ -4,7 +4,6 @@ import Card from "../card/card-component";
 import "./course-list.styles.css";
 
 function CourseList({ courses }) {
-
   return (
     <div className="card-list">
       {courses.map((course) => {

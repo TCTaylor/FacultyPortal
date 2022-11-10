@@ -25,7 +25,7 @@ function Profile() {
   // Will call the Faculty controller
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/Faculty/" + 11)
+      .get(API_BASE_URL + "/Faculty")
       .then((response) => {
         setProfile(response.data);
         setLoading(false);
@@ -47,37 +47,40 @@ function Profile() {
   }
 
   return (
-    <div className="profile-wrapper">
-      <div className="profile-img">
-        <img
-          className="rounded-circle"
-          width="250px"
-          height="250px"
-          alt="Profile picture"
-          // src={photoPath + photoFileName}
-          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-        />
-        <button className="btn-edit">
-          <i className="bi bi-pencil-square"></i>
-        </button>
-        <input
-          className="m-2"
-          type="file"
-          hidden
-          onChange={handleImageUpload}
-        />
-      </div>
-      <div key={profile[0].id}>
-        <h2>
-          {profile[0].firstName} {profile[0].lastName}
-        </h2>
-        <h3>Title</h3>
-        <h3>Profile</h3>
-        <ul>
-          <li>Tasks</li>
-          <li>Calendar</li>
-          <li>Files</li>
-        </ul>
+    <div className="container mt-4">
+      <div className="profile-wrapper">
+        <div className="profile-img">
+          <img
+            className="rounded-circle"
+            width="250px"
+            height="250px"
+            alt="Profile picture"
+            // src={photoPath + photoFileName}
+            src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+          />
+          <button className="btn-edit">
+            <i className="bi bi-pencil-square"></i>
+          </button>
+          <input
+            className="m-2"
+            type="file"
+            hidden
+            onChange={handleImageUpload}
+          />
+        </div>
+        <div key={profile[0].id}>
+          <h2>
+            {/* {profile[0].firstName} {profile[0].lastName} */}
+            Name
+          </h2>
+          <h3>Title</h3>
+          <h3>Profile</h3>
+          <ul>
+            <li>Tasks</li>
+            <li>Calendar</li>
+            <li>Files</li>
+          </ul>
+        </div>
       </div>
     </div>
   );

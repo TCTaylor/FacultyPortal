@@ -28,14 +28,18 @@ namespace facultyportal_backend.Helpers
                                Subject = src.CourseSubject,
                                Number = src.CourseNumber,
                                Title = src.CourseTitle,
-                               SectionNumber = src.SectionNumber
+                               SectionNumber = src.SectionNumber,
                            }));
 
-            CreateMap<Faculty, FacultyDto>().ReverseMap();
+            CreateMap<Faculty, FacultyDto>()
+                .ReverseMap()
+                .ForMember(dest => dest.FacultyQualifications,
+                           opts => opts.MapFrom(src => new FacultyQualification
+                           {
+                               Credential = src.Credential,
+                           }));
 
             CreateMap<FacultyQualification, FacultyQualificationsDto>().ReverseMap();
-
-            CreateMap<Qualification, QualificationsDto>().ReverseMap();
 
             //CreateMap<Role, RolesDto>().ReverseMap();
 

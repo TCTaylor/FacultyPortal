@@ -11,28 +11,26 @@ import axios from "axios";
 const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseMaintenance() {
+  const { instId } = useParams();
+
   const [loading, setLoading] = useState(true);
   const [facultyCourses, setFacultyCourses] = useState([]);
   const [searchField, setSearchField] = useState(""); // [value, setValue]
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(null);
 
-  const { instId } = useParams();
-
-  // Will call the FacultyCourses controller
   useEffect(() => {
     axios
-      //.get("https://jsonplaceholder.typicode.com/users")
       .get(API_BASE_URL + "/FacultyCourses/" + instId)
       .then((response) => {
         setFacultyCourses(response.data);
         setLoading(false);
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         setError(error);
         setLoading(false);
-        console.log(error);
+        console.log(error.response.status);
       });
   }, []);
 
@@ -44,6 +42,9 @@ function CourseMaintenance() {
     });
 
     setFilteredCourses(newFilteredCourses);
+
+    console.log("filteredCourses");
+    console.log(filteredCourses);
   }, [facultyCourses, searchField]);
 
   const onSearchChange = (event) => {
@@ -60,8 +61,8 @@ function CourseMaintenance() {
   }
 
   return (
-    <div>
-      <h1>This is the Courses page</h1>
+    <div className="container mt-4">
+      <h1>This is the Course Modification page</h1>
 
       <SearchBox
         className="search-box"

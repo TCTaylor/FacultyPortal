@@ -1,6 +1,6 @@
 function Error(error) {
   const renderSwitch = () => {
-    console.log(error.error);
+    // console.log(error.error);
     switch (error.error) {
       case 400:
         return (
@@ -45,7 +45,7 @@ function Error(error) {
     }
   };
 
-  return <div>{renderSwitch()}</div>;
+  return <div className="container mt-4">{renderSwitch()}</div>;
 }
 
 export default Error;

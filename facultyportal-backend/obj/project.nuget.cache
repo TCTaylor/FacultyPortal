@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "D/nKLG7QJ/H4WCAPA88x3hLho6AOYQdyCl3FuAWC+NvHi1UMftruNSeiW+PKduO6iTV+iTBu6eeOw7z2xIA0vQ==",
+  "dgSpecHash": "1IlJQJheI/0oyekp8A7h+UXryFixfemGuyCQ6SooVikfT+DZkvGa1bLLa0Grz2TmXna2JCgv0yWHJvzpRh1p/Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Tracey Taylor\\source\\repos\\FacultyPortal\\facultyportal-backend\\facultyportal-backend.csproj",
   "expectedPackageFiles": [
@@ -120,7 +120,7 @@
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.composition.typedparts\\1.0.31\\system.composition.typedparts.1.0.31.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.0\\system.configuration.configurationmanager.6.0.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.console\\4.3.0\\system.console.4.3.0.nupkg.sha512",
-    "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.data.sqlclient\\4.8.4\\system.data.sqlclient.4.8.4.nupkg.sha512",
+    "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.data.sqlclient\\4.8.5\\system.data.sqlclient.4.8.5.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\Tracey Taylor\\.nuget\\packages\\system.diagnostics.tools\\4.3.0\\system.diagnostics.tools.4.3.0.nupkg.sha512",

@@ -60,7 +60,7 @@ function FacultyCourses() {
   }
 
   return (
-    <div>
+    <div className="container mt-4">
       <h1>This is the Courses page</h1>
 
       <SearchBox

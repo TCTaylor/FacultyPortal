@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 
 function FacultyList({ faculty }) {
-  faculty.map((fac) => {
-    // console.log(fac.qualifications);
-    fac.qualifications.map((qual) => {
-      // console.log(qual);
-    });
-  });
+  // faculty.map((fac) => {
+  //   fac.qualifications.map((qual) => {
+  //     console.log(qual);
+  //   });
+  // });
 
   return (
     <div>
@@ -30,12 +29,20 @@ function FacultyList({ faculty }) {
                 <td>{fac.lastName}</td>
                 <td>{fac.midInit}</td>
                 <td>{fac.suffix}</td>
-                <td></td>
+                <td>{fac.credential}</td>
+                {/* <td>
+                  <table>
+                    <tbody>
+                      {fac.qualifications.map((facQual) => {
+                        <tr key={facQual.id}>
+                          <td>{facQual.credential}</td>
+                        </tr>;
+                      })}
+                    </tbody>
+                  </table>
+                </td> */}
                 <td>
-                  <Link
-                    className="nav-link"
-                    to={"/courses-maint/" + fac.instId}
-                  >
+                  <Link to={"/courses-maint/" + fac.instId}>
                     <button title="Edit Courses">
                       <i className="bi bi-journals"> </i>
                       Courses
@@ -63,17 +70,6 @@ function FacultyList({ faculty }) {
                     </button>
                   </Link>
                 </td>
-                {/* <td>
-                  <table>
-                    <tbody>
-                      {fac.qualifications.map((qual) => {
-                        <tr key={qual.id}>
-                          <td>{qual.credential}</td>
-                        </tr>;
-                      })}
-                    </tbody>
-                  </table>
-                </td> */}
               </tr>
             );
           })}

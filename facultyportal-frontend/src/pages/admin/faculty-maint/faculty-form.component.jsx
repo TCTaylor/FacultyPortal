@@ -32,7 +32,7 @@ function FacultyForm() {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -40,7 +40,7 @@ function FacultyForm() {
   }
 
   return (
-    <div>
+    <div className="container mt-4">
       <input title="qualifications" placeholder={formValues[0].qualifications[0]} />
     </div>
   );

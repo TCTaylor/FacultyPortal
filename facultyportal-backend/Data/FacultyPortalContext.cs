@@ -1,6 +1,8 @@
-﻿using facultyportal_backend.Models;
+﻿using System;
+using System.Collections.Generic;
+using facultyportal_backend.Models;
 using Microsoft.EntityFrameworkCore;
-using facultyportal_backend.Application.DTOs;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace facultyportal_backend.Data
 {
@@ -21,7 +23,6 @@ namespace facultyportal_backend.Data
         public virtual DbSet<Faculty> Faculty { get; set; } = null!;
         public virtual DbSet<FacultyCourse> FacultyCourses { get; set; } = null!;
         public virtual DbSet<FacultyQualification> FacultyQualifications { get; set; } = null!;
-        public virtual DbSet<Qualification> Qualifications { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Section> Sections { get; set; } = null!;
 
@@ -93,8 +94,6 @@ namespace facultyportal_backend.Data
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
-                entity.Property(e => e.QualId).HasColumnName("Qual_Id");
-
                 entity.Property(e => e.SectionNumber)
                     .HasMaxLength(3)
                     .IsUnicode(false)
@@ -113,12 +112,6 @@ namespace facultyportal_backend.Data
                     .HasForeignKey(d => d.DivisionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Course_Division");
-
-                entity.HasOne(d => d.Qual)
-                    .WithMany(p => p.Courses)
-                    .HasForeignKey(d => d.QualId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Course_Qualification");
             });
 
             modelBuilder.Entity<Division>(entity =>
@@ -186,30 +179,17 @@ namespace facultyportal_backend.Data
             {
                 entity.ToTable("Faculty_Qualification");
 
-                entity.Property(e => e.FacultyId).HasColumnName("Faculty_Id");
+                entity.Property(e => e.Credential)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.QualId).HasColumnName("Qual_Id");
+                entity.Property(e => e.FacultyId).HasColumnName("Faculty_Id");
 
                 entity.HasOne(d => d.Faculty)
                     .WithMany(p => p.FacultyQualifications)
                     .HasForeignKey(d => d.FacultyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Faculty_Qualification_Faculty");
-
-                entity.HasOne(d => d.Qualification)
-                    .WithMany(p => p.FacultyQualifications)
-                    .HasForeignKey(d => d.QualId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Faculty_Qualification_Qualification");
-            });
-
-            modelBuilder.Entity<Qualification>(entity =>
-            {
-                entity.ToTable("Qualification");
-
-                entity.Property(e => e.Credential)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -246,7 +226,5 @@ namespace facultyportal_backend.Data
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<facultyportal_backend.Application.DTOs.FacultyDto> FacultyDto { get; set; }
     }
 }
