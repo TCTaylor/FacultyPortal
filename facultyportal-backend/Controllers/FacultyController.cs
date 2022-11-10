@@ -26,34 +26,32 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<IEnumerable<FacultyDto>>> GetFaculty()
         {
             var faculty = await _context.Faculty
-                .Include(x => x.FacultyQualifications)
                 .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            return Ok(faculty);
+            var dtoList = new List<FacultyDto>();
 
-            //var dto = new FacultyDto();
+            for (int i = 0; i < faculty.Count; i++)
+            {
+                var dto = new FacultyDto
+                {
+                    Id = faculty[i].Id,
+                    InstId = faculty[i].InstId,
+                    FirstName = faculty[i].FirstName,
+                    LastName = faculty[i].LastName,
+                    MidInit = faculty[i].MidInit,
+                    Suffix = faculty[i].Suffix,
+                    Qualifications = await _context.FacultyQualifications
+                    .Where(x => x.FacultyId == faculty[i].Id)
+                    .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync()
+                };
 
-            //var dtoList = new List<FacultyDto>();
+                dtoList.Add(dto);
 
-            //for (int i = 0; i < faculty.Count; i++)
-            //{
-            //    dto.Id = faculty[i].Id;
-            //    dto.InstId = faculty[i].InstId;
-            //    dto.FirstName = faculty[i].FirstName;
-            //    dto.LastName = faculty[i].LastName;
-            //    dto.MidInit = faculty[i].MidInit;
-            //    dto.Suffix = faculty[i].Suffix;
-            //    dto.Qualifications = await _context.FacultyQualifications
-            //        .Where(x => x.FacultyId == faculty[i].Id)
-            //        .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
-            //        .ToListAsync();
+            }
 
-            //    dtoList.Add(dto);
-
-            //}
-
-            //return Ok(dtoList);
+            return Ok(dtoList);
 
         }
 
@@ -62,30 +60,30 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<FacultyDto>> GetFaculty(int id)
         {
             var faculty = await _context.Faculty
-                .Include(x => x.FacultyQualifications)
                 .Where(x => x.Id == id)
                 .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
             return Ok(faculty);
 
-            //var dto = new FacultyDto();
+            var dto = new FacultyDto();
 
-            //for (var x = 0; x < faculty.Count; x++)
-            //{
-            //    dto.Id = faculty[x].Id;
-            //    dto.InstId = faculty[x].InstId;
-            //    dto.FirstName = faculty[x].FirstName;
-            //    dto.LastName = faculty[x].LastName;
-            //    dto.MidInit = faculty[x].MidInit;
-            //    dto.Suffix = faculty[x].Suffix;
-            //    dto.Qualifications = await _context.FacultyQualifications
-            //        .Where(x => x.FacultyId == id)
-            //        .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
-            //        .ToListAsync();;
-            //}
+            for (var x = 0; x < faculty.Count; x++)
+            {
 
-            //return Ok(dto);
+                dto.Id = faculty[x].Id;
+                dto.InstId = faculty[x].InstId;
+                dto.FirstName = faculty[x].FirstName;
+                dto.LastName = faculty[x].LastName;
+                dto.MidInit = faculty[x].MidInit;
+                dto.Suffix = faculty[x].Suffix;
+                dto.Qualifications = await _context.FacultyQualifications
+                    .Where(x => x.FacultyId == id)
+                    .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync(); ;
+            }
+
+            return Ok(dto);
         }
 
         //// PUT: api/Faculty/5

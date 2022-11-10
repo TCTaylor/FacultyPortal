@@ -1,23 +1,17 @@
 import { Link } from "react-router-dom";
 
 function FacultyList({ faculty }) {
-  // faculty.map((fac) => {
-  //   fac.qualifications.map((qual) => {
-  //     console.log(qual);
-  //   });
-  // });
-
   return (
     <div>
-      <table>
+      <table className="table table-sm table-hover">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>M. I.</th>
-            <th>Suffix</th>
-            <th>Qualifications</th>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">M. I.</th>
+            <th scope="col">Suffix</th>
+            <th scope="col">Qualifications</th>
           </tr>
         </thead>
         <tbody>
@@ -29,18 +23,19 @@ function FacultyList({ faculty }) {
                 <td>{fac.lastName}</td>
                 <td>{fac.midInit}</td>
                 <td>{fac.suffix}</td>
-                <td>{fac.credential}</td>
-                {/* <td>
+                <td>
                   <table>
                     <tbody>
-                      {fac.qualifications.map((facQual) => {
-                        <tr key={facQual.id}>
-                          <td>{facQual.credential}</td>
-                        </tr>;
+                      {fac.qualifications.map((qual) => {
+                        return (
+                          <tr key={qual.id}>
+                            <td>{qual.credential}</td>
+                          </tr>
+                        );
                       })}
                     </tbody>
                   </table>
-                </td> */}
+                </td>
                 <td>
                   <Link to={"/courses-maint/" + fac.instId}>
                     <button title="Edit Courses">

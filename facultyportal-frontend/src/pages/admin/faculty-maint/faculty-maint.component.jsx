@@ -23,7 +23,7 @@ function FacultyMaintenance() {
       .then((response) => {
         setFaculty(response.data);
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         setError(error);
@@ -33,14 +33,15 @@ function FacultyMaintenance() {
   }, []);
 
   // // TODO - search by last name, first name, or ID
-  // useEffect(() => {
-  //   const newFilteredFaculty = faculty.filter((fac) => {
-  //     return fac.lastName.toLocaleLowerCase().includes(searchField);
-  //   });
-
-  //   // console.log(filteredFaculty);
-  //   setFilteredFaculty(newFilteredFaculty);
-  // }, [faculty, searchField]);
+  useEffect(() => {
+    const newFilteredFaculty = faculty
+      .reduce((a, v) => a.concat(v), [])
+      .filter((fac) => {
+        return fac.lastName.toLocaleLowerCase().includes(searchField);
+      });
+    setFilteredFaculty(newFilteredFaculty);
+    console.log(filteredFaculty);
+  }, [faculty, searchField]);
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
@@ -52,7 +53,7 @@ function FacultyMaintenance() {
   }
 
   if (error) {
-    return <Error error={error.response.status}/>;
+    return <Error error={error.response.status} />;
   }
 
   return (
@@ -63,8 +64,7 @@ function FacultyMaintenance() {
         placeholder="Search faculty"
         onChangeHandler={onSearchChange}
       />
-      {/* <FacultyList faculty={filteredFaculty} /> */}
-      <FacultyList faculty={faculty} />
+      <FacultyList faculty={filteredFaculty} />
     </div>
   );
 }

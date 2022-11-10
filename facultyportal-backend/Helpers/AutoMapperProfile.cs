@@ -31,13 +31,7 @@ namespace facultyportal_backend.Helpers
                                SectionNumber = src.SectionNumber,
                            }));
 
-            CreateMap<Faculty, FacultyDto>()
-                .ReverseMap()
-                .ForMember(dest => dest.FacultyQualifications,
-                           opts => opts.MapFrom(src => new FacultyQualification
-                           {
-                               Credential = src.Credential,
-                           }));
+            CreateMap<Faculty, FacultyDto>().ReverseMap();
 
             CreateMap<FacultyQualification, FacultyQualificationsDto>().ReverseMap();
 
