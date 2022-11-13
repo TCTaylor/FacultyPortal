@@ -90,7 +90,7 @@ function ProfileImage() {
         />
         <button
           type="button"
-          className="btn-edit btn btn-secondary"
+          className="btn-edit btn btn-outline-dark"
           title="Change profile pic"
           onClick={openModal}
         >

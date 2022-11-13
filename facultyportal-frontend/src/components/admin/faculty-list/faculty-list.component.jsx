@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 function FacultyList({ faculty }) {
   return (
     <div>
+      <div style={{float: 'right', paddingRight: '20px'}}>
+        <Link to={"/faculty-maint" + "/add"}>
+          <button className="btn btn-primary" title="Add">
+            <i className="bi bi-plus-lg"> </i>
+            Add Faculty
+          </button>
+        </Link>
+      </div>
       <table className="table table-sm table-hover">
         <thead>
           <tr>
@@ -38,7 +46,10 @@ function FacultyList({ faculty }) {
                 </td>
                 <td>
                   <Link to={"/courses-maint/" + fac.instId}>
-                    <button title="Edit Courses">
+                    <button
+                      className="btn btn-outline-secondary"
+                      title="Edit Courses"
+                    >
                       <i className="bi bi-journals"> </i>
                       Courses
                     </button>
@@ -46,22 +57,15 @@ function FacultyList({ faculty }) {
                 </td>
                 <td>
                   <Link to={"/faculty-maint/" + fac.id}>
-                    <button title="Edit">
+                    <button className="btn btn-dark" title="Edit">
                       <i className="bi bi-pencil-square"></i>
                     </button>
                   </Link>
                 </td>
                 <td>
-                  <Link to={"/faculty-maint" + "/add"}>
-                    <button title="Add">
-                      <i className="bi bi-plus-square-fill"></i>
-                    </button>
-                  </Link>
-                </td>
-                <td>
                   <Link>
-                    <button title="Delete">
-                      <i className="bi bi-x-square-fill"></i>
+                    <button className="btn btn-outline-danger" title="Delete">
+                      <i className="bi bi-trash3-fill"></i>
                     </button>
                   </Link>
                 </td>

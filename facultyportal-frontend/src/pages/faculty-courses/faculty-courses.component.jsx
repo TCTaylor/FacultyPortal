@@ -61,15 +61,13 @@ function FacultyCourses() {
 
   return (
     <div className="container mt-4">
-      <h1>This is the Courses page</h1>
-
+      <h1>Courses</h1>
       <SearchBox
         className="search-box"
         type="search"
         placeholder="Search courses"
         onChangeHandler={onSearchChange}
       />
-
       <CourseList courses={filteredCourses} />
     </div>
   );

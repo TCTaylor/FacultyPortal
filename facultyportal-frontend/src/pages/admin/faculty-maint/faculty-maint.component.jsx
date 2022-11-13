@@ -40,7 +40,7 @@ function FacultyMaintenance() {
         return fac.lastName.toLocaleLowerCase().includes(searchField);
       });
     setFilteredFaculty(newFilteredFaculty);
-    console.log(filteredFaculty);
+    // console.log(filteredFaculty);
   }, [faculty, searchField]);
 
   const onSearchChange = (event) => {
@@ -59,7 +59,7 @@ function FacultyMaintenance() {
   return (
     <div className="container mt-4">
       <SearchBox
-        className="search-box"
+        className="search-box m-4"
         type="search"
         placeholder="Search faculty"
         onChangeHandler={onSearchChange}

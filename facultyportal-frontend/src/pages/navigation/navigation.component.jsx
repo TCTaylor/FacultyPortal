@@ -6,13 +6,19 @@ import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
 
 import useAuth from "../../hooks/use-auth";
+import axios from "axios";
 
 import DfltProfileImg from "../../assets/user-profile-icon-free-vector.webp";
 import "./navigation.styles.css";
 
+const API_BASE_URL = "https://localhost:7078/api";
+
 function Navigation() {
   const [signingOut, setSigningOut] = useState(false);
-  const { displayName, isAdmin, isEditor, isReadOnly } = useAuth();
+  // const [profileImgData, setProfileImgData] = useState([]);
+  // const [profileImg, setProfileImg] = useState(null);
+
+  const { accessorId, displayName, isAdmin, isEditor, isReadOnly } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = () => {
@@ -25,6 +31,17 @@ function Navigation() {
       navigate("/sign-in");
     }
   }, [signingOut]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(API_BASE_URL + "/ProfileImages/" + accessorId)
+  //     .then((response) => {
+  //       setProfileImgData(response.data);
+  //       setProfileImg(URL.createObjectURL(profileImgData[0].imagePath));
+  //     })
+  //     .catch((error) => {
+  //     });
+  // }, []);
 
   return (
     <Fragment>
@@ -77,6 +94,7 @@ function Navigation() {
                   >
                     <img
                       className="rounded-circle shadow-4"
+                      // src={profileImg ? profileImg : DfltProfileImg}
                       src={DfltProfileImg}
                       alt="Profile picture"
                       width="60"

@@ -9,7 +9,7 @@ function Card({ course }) {
       <h2>{courseSubject + " " + courseNumber}</h2>
       <p>{courseTitle}</p>
       <Link to={"/courses/" + courseId}>
-        <button className="">Details</button>
+        <button className="btn btn-light">Details</button>
       </Link>
     </div>
   );

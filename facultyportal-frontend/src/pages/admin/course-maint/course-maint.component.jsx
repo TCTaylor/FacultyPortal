@@ -25,7 +25,7 @@ function CourseMaintenance() {
       .then((response) => {
         setFacultyCourses(response.data);
         setLoading(false);
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         setError(error);
@@ -60,14 +60,12 @@ function CourseMaintenance() {
   return (
     <div className="container mt-4">
       <h1>This is the Course Modification page</h1>
-
       <SearchBox
         className="search-box"
         type="search"
         placeholder="Search courses"
         onChangeHandler={onSearchChange}
       />
-
       <CourseMaintList courses={filteredCourses} />
     </div>
   );

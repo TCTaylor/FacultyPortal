@@ -3,8 +3,8 @@ import UserContext from "../../context/user-context";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth-service";
 
+import SignInImg from "../../assets/photo-1568667256549-094345857637.jpg";
 import FPLogo from "../../assets/books-stack-of-three-svgrepo-com.svg";
-import SignInImg from "../../assets/CHCBuildings-2_0.webp";
 import "./sign-in.styles.css";
 
 function SignIn() {
@@ -45,12 +45,12 @@ function SignIn() {
   }, [success]);
 
   return (
-    <div className="container py-5">
+    <div className="sign-in-container">
       <div className="row d-flex justify-content-center align-items-center">
         <div className="col col-xl-30">
           <div className="row g-0">
             <div className="col-md-6 col-lg-5 d-none d-md-block">
-              <img src={SignInImg} alt="Sign in form" className="img-fluid" />
+              <img src={SignInImg} alt="Sign in form" className="img-fluid"/>
             </div>
             <div className="col-md-6 col-lg-7 d-flex align-items-center">
               <div className="card-body p-4 p-lg-5 text-black">
@@ -101,7 +101,7 @@ function SignIn() {
                     </label>
                   </div>
                   <div className="pt-1 mb-4">
-                    <button className="btn btn-dark btn-lg" type="submit">
+                    <button className="btn btn-dark" type="submit">
                       {loading && (
                         <span
                           className="spinner-border spinner-border-sm"

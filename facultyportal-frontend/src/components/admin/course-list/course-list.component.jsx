@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 
 function CourseMaintList({ courses }) {
-
   // console.log(courses);
   return (
     <div>
-      <table>
+      <div style={{float: 'right', paddingRight: '20px'}}>
+        <Link to={"/courses-maint" + "/add"}>
+          <button className="btn btn-primary" title="Add">
+            <i className="bi bi-plus-lg"> </i>
+            Add Course
+          </button>
+        </Link>
+      </div>
+      <table className="table table-sm table-hover">
         <thead>
           <tr>
-            <th>Subject</th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Section</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Number</th>
+            <th scope="col">Title</th>
+            <th scope="col">Section</th>
           </tr>
         </thead>
         <tbody>
@@ -22,32 +29,17 @@ function CourseMaintList({ courses }) {
                 <td>{course.courseNumber}</td>
                 <td>{course.courseTitle}</td>
                 <td>{course.sectionNumber}</td>
-                <td>
-                  <Link className="nav-link" to={"/courses-maint/"}>
-                    <button title="Edit Courses">
-                      <i className="bi bi-journals"> </i>
-                      Courses
-                    </button>
-                  </Link>
-                </td>
-                <td>
+                <td width={60}>
                   <Link to={"/courses-maint/"}>
-                    <button title="Edit">
+                    <button className="btn btn-dark" title="Edit">
                       <i className="bi bi-pencil-square"></i>
                     </button>
                   </Link>
                 </td>
-                <td>
-                  <Link to={"/courses-maint" + "/add"}>
-                    <button title="Add">
-                      <i className="bi bi-plus-square-fill"></i>
-                    </button>
-                  </Link>
-                </td>
-                <td>
+                <td width={60}>
                   <Link>
-                    <button title="Delete">
-                      <i className="bi bi-x-square-fill"></i>
+                    <button className="btn btn-outline-danger" title="Delete">
+                      <i className="bi bi-trash3-fill"></i>
                     </button>
                   </Link>
                 </td>
