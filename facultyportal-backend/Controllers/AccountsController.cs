@@ -67,7 +67,9 @@ namespace facultyportal_backend.Controllers
                 InstId = accessor.InstId,
                 RoleId = accessor.RoleId,
                 UserName = accessor.UserName,
-                DisplayName = (faculty != null) ? faculty.FirstName : accessor.UserName,
+                DisplayName = (faculty != null)
+                              ? faculty.FirstName + " " + faculty.LastName
+                              : accessor.UserName,
                 Email = accessor.Email,
                 Password = accessor.Password,
                 RoleTitle = accessor.Role.Title,

@@ -35,7 +35,7 @@ namespace facultyportal_backend.Helpers
 
             CreateMap<FacultyQualification, FacultyQualificationsDto>().ReverseMap();
 
-            //CreateMap<Role, RolesDto>().ReverseMap();
+            CreateMap<ProfileImage, ProfileImagesDto>().ReverseMap();
 
             CreateMap<Section, SectionsDto>().ReverseMap();
         }

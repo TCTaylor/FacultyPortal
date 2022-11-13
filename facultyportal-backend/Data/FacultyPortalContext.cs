@@ -23,6 +23,7 @@ namespace facultyportal_backend.Data
         public virtual DbSet<Faculty> Faculty { get; set; } = null!;
         public virtual DbSet<FacultyCourse> FacultyCourses { get; set; } = null!;
         public virtual DbSet<FacultyQualification> FacultyQualifications { get; set; } = null!;
+        public virtual DbSet<ProfileImage> ProfileImages { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Section> Sections { get; set; } = null!;
 
@@ -190,6 +191,24 @@ namespace facultyportal_backend.Data
                     .HasForeignKey(d => d.FacultyId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Faculty_Qualification_Faculty");
+            });
+
+            modelBuilder.Entity<ProfileImage>(entity =>
+            {
+                entity.ToTable("Profile_Image");
+
+                entity.Property(e => e.AccessorId).HasColumnName("Accessor_Id");
+
+                entity.Property(e => e.ImagePath)
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("Image_Path");
+
+                entity.HasOne(d => d.Accessor)
+                    .WithMany(p => p.ProfileImages)
+                    .HasForeignKey(d => d.AccessorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Profile_Accessor");
             });
 
             modelBuilder.Entity<Role>(entity =>

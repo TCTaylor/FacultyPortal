@@ -4,8 +4,10 @@ import { ReactComponent as FPLogo } from "../../assets/books-stack-of-three-svgr
 import { useNavigate } from "react-router-dom";
 import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
+
 import useAuth from "../../hooks/use-auth";
 
+import DfltProfileImg from "../../assets/user-profile-icon-free-vector.webp";
 import "./navigation.styles.css";
 
 function Navigation() {
@@ -75,7 +77,7 @@ function Navigation() {
                   >
                     <img
                       className="rounded-circle shadow-4"
-                      src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                      src={DfltProfileImg}
                       alt="Profile picture"
                       width="60"
                       height="60"

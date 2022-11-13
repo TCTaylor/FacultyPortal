@@ -40,7 +40,7 @@ function CourseDetails() {
   }
 
   return (
-    <div>
+    <div className="container mt-4">
       <h3>This is the Course Details page</h3>
       <div key={course[0].id}>
         <DetailsList course={course[0]} />

@@ -1,0 +1,27 @@
+.profile-img {
+    position: relative;
+    width: 250px;
+  }
+  
+  .profile-img img {
+    display: block;
+    padding: 10px;
+    width: 250px;
+  }
+  
+  .btn-edit {
+    margin: 10px;
+    display: none;
+  }
+  
+  .profile-img:hover img {
+    box-shadow: inset 0 0 10px #000000;
+  }
+  
+  .profile-img:hover .btn-edit {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  

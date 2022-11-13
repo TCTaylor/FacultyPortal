@@ -42,9 +42,6 @@ function CourseMaintenance() {
     });
 
     setFilteredCourses(newFilteredCourses);
-
-    console.log("filteredCourses");
-    console.log(filteredCourses);
   }, [facultyCourses, searchField]);
 
   const onSearchChange = (event) => {

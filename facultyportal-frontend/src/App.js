@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 
 import Navigation from "./pages/navigation/navigation.component";
 import Home from "./pages/home/home.component";
@@ -12,6 +17,7 @@ import FacultyForm from "./pages/admin/faculty-maint/faculty-form.component";
 import CourseMaintenance from "./pages/admin/course-maint/course-maint.component";
 import CourseForm from "./pages/admin/course-maint/course-form.component";
 
+import "./App.css";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -38,7 +44,7 @@ function App() {
 
           <Route path="/faculty-maint" element={<FacultyMaintenance />} />
           <Route path="/faculty-maint/:id" element={<FacultyForm />} />
-          
+
           <Route path="/courses-maint/:instId" element={<CourseMaintenance />} />
           <Route path="/courses-maint/add" element={<CourseForm />} />
         </Route>

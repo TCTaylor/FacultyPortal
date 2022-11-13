@@ -73,19 +73,6 @@ function FacultyCourses() {
       <CourseList courses={filteredCourses} />
     </div>
   );
-
-  // return (
-  //   <div>
-  //     {courses.map((course) => {
-  //       return (
-  //         <div key={course.id}>
-  //           <h1>{course.title}</h1>
-  //           <h1>{course.code}</h1>
-  //         </div>
-  //       );
-  //     })}
-  //   </div>
-  //   )
 }
 
 export default FacultyCourses;

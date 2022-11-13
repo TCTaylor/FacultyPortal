@@ -1,4 +1,7 @@
-﻿namespace facultyportal_backend.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace facultyportal_backend.Models
 {
     public partial class Course
     {
@@ -15,7 +18,7 @@
         public string DivisionId { get; set; } = null!;
         public int MaxSize { get; set; }
         public int MinSize { get; set; }
-        public string SectionNumber { get; set; }
+        public string? SectionNumber { get; set; }
 
         public virtual Division Division { get; set; } = null!;
         public virtual ICollection<FacultyCourse> FacultyCourses { get; set; }

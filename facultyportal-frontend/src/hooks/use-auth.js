@@ -7,16 +7,17 @@ const useAuth = () => {
 
   if (token) {
     const userInfo = JSON.parse(token);
-    const { instId, role, userName, displayName } = userInfo;
+    const { id, instId, role, userName, displayName } = userInfo;
 
     isAdmin = userInfo["isAdmin"];
     isEditor = userInfo["isEditor"];
     isEditor = userInfo["isReadOnly"];
     // isReadOnly = userInfo["isReadOnly"];
 
-    // console.log(instId, userName, displayName, isAdmin, isEditor, isReadOnly);
-
+    // console.log(id, instId, userName, displayName, isAdmin, isEditor, isReadOnly);
+    const accessorId = id;
     return {
+      accessorId,
       instId,
       role,
       userName,

@@ -64,13 +64,10 @@ namespace facultyportal_backend.Controllers
                 .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
 
-            return Ok(faculty);
-
             var dto = new FacultyDto();
 
             for (var x = 0; x < faculty.Count; x++)
             {
-
                 dto.Id = faculty[x].Id;
                 dto.InstId = faculty[x].InstId;
                 dto.FirstName = faculty[x].FirstName;

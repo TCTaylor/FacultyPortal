@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CourseMaintList({ courses }) {
 
-  console.log(courses);
+  // console.log(courses);
   return (
     <div>
       <table>

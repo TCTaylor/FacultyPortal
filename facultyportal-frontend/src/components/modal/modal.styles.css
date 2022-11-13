@@ -1,0 +1,42 @@
+.fp-modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(156, 156, 156);
+  z-index: 1;
+}
+
+.fp-modal-container {
+  position: fixed;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 30px;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.header-close-btn {
+  margin: 5px;
+  float: right;
+  border-radius: 5px;
+}
+
+.fp-modal-title {
+  padding: 10px;
+  display: inline-block;
+}
+
+.fp-modal-body {
+  padding: 10px;
+}
+
+.fp-modal-footer {
+  padding: 10px;
+  display: flex;
+  justify-content: right;
+}
