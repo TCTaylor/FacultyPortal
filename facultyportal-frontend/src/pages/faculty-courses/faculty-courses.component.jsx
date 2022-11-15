@@ -38,9 +38,13 @@ function FacultyCourses() {
 
   useEffect(() => {
     const newFilteredCourses = facultyCourses.filter((facultyCourse) => {
-      return facultyCourse.courseTitle
-        .toLocaleLowerCase()
-        .includes(searchField);
+      if (isNaN(+searchField)) {
+        return facultyCourse.courseTitle
+          .toLocaleLowerCase()
+          .includes(searchField);
+      } else {
+        return facultyCourse.courseNumber.includes(searchField);
+      }
     });
 
     setFilteredCourses(newFilteredCourses);
@@ -56,7 +60,7 @@ function FacultyCourses() {
   }
 
   if (error) {
-    return <Error error={error.response.status}/>;
+    return <Error error={error.response.status} />;
   }
 
   return (

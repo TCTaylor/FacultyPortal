@@ -36,9 +36,13 @@ function CourseMaintenance() {
 
   useEffect(() => {
     const newFilteredCourses = facultyCourses.filter((facultyCourse) => {
-      return facultyCourse.courseTitle
-        .toLocaleLowerCase()
-        .includes(searchField);
+      if (isNaN(+searchField)) {
+        return facultyCourse.courseTitle
+          .toLocaleLowerCase()
+          .includes(searchField);
+      } else {
+        return facultyCourse.courseNumber.includes(searchField);
+      }
     });
 
     setFilteredCourses(newFilteredCourses);

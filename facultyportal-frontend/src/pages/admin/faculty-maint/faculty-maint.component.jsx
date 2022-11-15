@@ -32,12 +32,16 @@ function FacultyMaintenance() {
       });
   }, []);
 
-  // // TODO - search by last name, first name, or ID
+  // Search by last name or ID
   useEffect(() => {
     const newFilteredFaculty = faculty
       .reduce((a, v) => a.concat(v), [])
       .filter((fac) => {
-        return fac.lastName.toLocaleLowerCase().includes(searchField);
+        if (isNaN(+searchField)) {
+          return fac.lastName.toLocaleLowerCase().includes(searchField);
+        } else {
+          return fac.instId.toString().includes(searchField);
+        }
       });
     setFilteredFaculty(newFilteredFaculty);
     // console.log(filteredFaculty);
