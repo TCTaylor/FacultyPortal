@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using AutoMapper.Internal;
 using AutoMapper.QueryableExtensions;
 using facultyportal_backend.Application.DTOs;
 using facultyportal_backend.Data;
+using facultyportal_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,14 +25,20 @@ namespace facultyportal_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FacultyDto>>> GetFaculty()
         {
-            var faculty = await _context.Faculty
-                .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var faculty = await _context.Faculty.ToListAsync();
 
             var dtoList = new List<FacultyDto>();
 
             for (int i = 0; i < faculty.Count; i++)
             {
+                var accessor = await _context.Accessors
+                    .FirstOrDefaultAsync(x => x.InstId == faculty[i].InstId);
+
+                var qualifications = await _context.FacultyQualifications
+                    .Where(x => x.FacultyId == faculty[i].Id)
+                    .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+
                 var dto = new FacultyDto
                 {
                     Id = faculty[i].Id,
@@ -41,14 +47,11 @@ namespace facultyportal_backend.Controllers
                     LastName = faculty[i].LastName,
                     MidInit = faculty[i].MidInit,
                     Suffix = faculty[i].Suffix,
-                    Qualifications = await _context.FacultyQualifications
-                    .Where(x => x.FacultyId == faculty[i].Id)
-                    .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync()
+                    DivisionId = accessor?.DivisionId,
+                    Qualifications = qualifications,
                 };
 
                 dtoList.Add(dto);
-
             }
 
             return Ok(dtoList);
@@ -59,91 +62,73 @@ namespace facultyportal_backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<FacultyDto>> GetFaculty(int id)
         {
-            var faculty = await _context.Faculty
-                .Where(x => x.Id == id)
-                .ProjectTo<FacultyDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var faculty = await _context.Faculty.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (faculty == null) return NotFound();
 
             var dto = new FacultyDto();
+            
+            var accessor = await _context.Accessors
+                .FirstOrDefaultAsync(x => x.InstId == faculty.InstId);
 
-            for (var x = 0; x < faculty.Count; x++)
-            {
-                dto.Id = faculty[x].Id;
-                dto.InstId = faculty[x].InstId;
-                dto.FirstName = faculty[x].FirstName;
-                dto.LastName = faculty[x].LastName;
-                dto.MidInit = faculty[x].MidInit;
-                dto.Suffix = faculty[x].Suffix;
-                dto.Qualifications = await _context.FacultyQualifications
-                    .Where(x => x.FacultyId == id)
-                    .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
-                    .ToListAsync(); ;
-            }
+            var qualifications = await _context.FacultyQualifications
+                .Where(x => x.FacultyId == faculty.Id)
+                .ProjectTo<FacultyQualificationsDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+
+            dto.Id = faculty.Id;
+            dto.InstId = faculty.InstId;
+            dto.FirstName = faculty.FirstName;
+            dto.LastName = faculty.LastName;
+            dto.MidInit = faculty.MidInit;
+            dto.Suffix = faculty.Suffix;
+            dto.DivisionId = accessor?.DivisionId;
+            dto.Qualifications = qualifications;
 
             return Ok(dto);
         }
 
-        //// PUT: api/Faculty/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutFaculty(int id, FacultyDto faculty)
-        //{
-        //    if (id != faculty.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/Faculty/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutFaculty(int id, [FromBody] FacultyDto dto)
+        {
+            var entry = await _context.Faculty.FindAsync(id);
 
-        //    _context.Entry(faculty).State = EntityState.Modified;
+            if (entry == null) return BadRequest();
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!FacultyExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            _mapper.Map(dto, entry);
 
-        //    return NoContent();
-        //}
+            var result = await _context.SaveChangesAsync() > 0;
 
-        //// POST: api/Faculty
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPost]
-        //public async Task<ActionResult<FacultyDto>> PostFaculty(FacultyDto faculty)
-        //{
-        //    _context.Faculty.Add(faculty);
-        //    await _context.SaveChangesAsync();
+            if (!result) return StatusCode(500);
 
-        //    return CreatedAtAction("GetFaculty", new { id = faculty.Id }, faculty);
-        //}
+            return NoContent();
+        }
 
-        //// DELETE: api/Faculty/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteFaculty(int id)
-        //{
-        //    var faculty = await _context.Faculty.FindAsync(id);
-        //    if (faculty == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // POST: api/Faculty
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<FacultyDto>> PostFaculty(Faculty faculty)
+        {
+            _context.Faculty.Add(faculty);
+            await _context.SaveChangesAsync();
 
-        //    _context.Faculty.Remove(faculty);
-        //    await _context.SaveChangesAsync();
+            return CreatedAtAction("GetFaculty", new { id = faculty.Id }, faculty);
+        }
 
-        //    return NoContent();
-        //}
+        // DELETE: api/Faculty/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFaculty(int id)
+        {
+            var faculty = await _context.Faculty.FindAsync(id);
+            if (faculty == null) return NotFound();
 
-        //private bool FacultyExists(int id)
-        //{
-        //    return _context.Faculty.Any(e => e.Id == id);
-        //}
+            _context.Faculty.Remove(faculty);
+            var result = await _context.SaveChangesAsync() > 0;
+
+            if (!result) return StatusCode(500);
+
+            return NoContent();
+        }
     }
 }

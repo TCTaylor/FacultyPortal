@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using facultyportal_backend.Application.DTOs;
 using facultyportal_backend.Data;
+using facultyportal_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,77 +36,60 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCoursesByFaculty(int instId)
         {
             var facultyCourses = await _context.FacultyCourses
-                .Include(c => c.Faculty)
-                .Where(c => c.Faculty.InstId == instId)
-                .ProjectTo<FacultyCoursesDto>(_mapper.ConfigurationProvider)
+                .Where(x => x.Faculty.InstId == instId)
                 .ToListAsync();
 
             if (!facultyCourses.Any()) return NotFound();
 
-            return Ok(facultyCourses);
+            var dtoList = new List<FacultyCoursesDto>();
+
+            for (int i = 0; i < facultyCourses.Count; i++)
+            {
+                var courses = await _context.Courses
+                    .FirstOrDefaultAsync(x => x.Id == facultyCourses[i].CourseId);
+
+                var dto = new FacultyCoursesDto
+                {
+                    Id = facultyCourses[i].Id,
+                    CourseId = courses.Id,
+                    CourseSubject = courses.Subject,
+                    CourseNumber = courses.Number,
+                    CourseTitle = courses.Title,
+                    SectionNumber = courses.SectionNumber,
+                };
+
+                dtoList.Add(dto);
+
+            }
+
+            return Ok(dtoList);
+
         }
 
-        //    // PUT: api/FacultyCourses/5
-        //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> PutFacultyCourse(int id, FacultyCourse facultyCourse)
-        //    {
-        //        if (id != facultyCourse.Id)
-        //        {
-        //            return BadRequest();
-        //        }
+        // POST: api/FacultyCourses
+        [HttpPost]
+        public async Task<ActionResult<ProfileImagesDto>> PostProfileImage(FacultyCourse facultyCourse)
+        {
+            _context.FacultyCourses.Add(facultyCourse);
 
-        //        _context.Entry(facultyCourse).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
 
-        //        try
-        //        {
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!FacultyCourseExists(id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
+            return CreatedAtAction("GetFacultyCourse", new { id = facultyCourse.Id }, facultyCourse);
+        }
 
-        //        return NoContent();
-        //    }
+        // DELETE: api/FacultyCourses/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFacultyCourse(int id)
+        {
+            var facultyCourse = await _context.FacultyCourses.FindAsync(id);
+            if (facultyCourse == null) return NotFound();
 
-        //    // POST: api/FacultyCourses
-        //    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //    [HttpPost]
-        //    public async Task<ActionResult<FacultyCourse>> PostFacultyCourse(FacultyCourse facultyCourse)
-        //    {
-        //        _context.FacultyCourses.Add(facultyCourse);
-        //        await _context.SaveChangesAsync();
+            _context.FacultyCourses.Remove(facultyCourse);
+            var result = await _context.SaveChangesAsync() > 0;
 
-        //        return CreatedAtAction("GetFacultyCourse", new { id = facultyCourse.Id }, facultyCourse);
-        //    }
+            if (!result) return StatusCode(500);
 
-        //    // DELETE: api/FacultyCourses/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<IActionResult> DeleteFacultyCourse(int id)
-        //    {
-        //        var facultyCourse = await _context.FacultyCourses.FindAsync(id);
-        //        if (facultyCourse == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        _context.FacultyCourses.Remove(facultyCourse);
-        //        await _context.SaveChangesAsync();
-
-        //        return NoContent();
-        //    }
-
-        //    private bool FacultyCourseExists(int id)
-        //    {
-        //        return _context.FacultyCourses.Any(e => e.Id == id);
-        //    }
+            return NoContent();
+        }
     }
 }

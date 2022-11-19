@@ -37,13 +37,15 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<ProfileImagesDto>> GetProfileImageByAccessor(int accessorId)
         {
             var profileImage = await _context.ProfileImages
-                .Where(c => c.AccessorId == accessorId)
-                .ProjectTo<ProfileImagesDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .FirstOrDefaultAsync(c => c.AccessorId == accessorId);
 
-            if (!profileImage.Any()) return NotFound();
+            if (profileImage == null) return NotFound();
 
-            return Ok(profileImage);
+            var dto = new ProfileImagesDto();
+
+            _mapper.Map(profileImage, dto);
+
+            return Ok(dto);
         }
 
         // PUT: api/ProfileImages/5

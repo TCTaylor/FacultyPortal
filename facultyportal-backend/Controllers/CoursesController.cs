@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using facultyportal_backend.Application.DTOs;
 using facultyportal_backend.Data;
+using facultyportal_backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,76 +37,58 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<CoursesDto>> GetCourse(int id)
         {
             var course = await _context.Courses
-                .Where(c => c.Id == id)
-                .ProjectTo<CoursesDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-            if (!course.Any()) return NotFound();
+            if (course == null) return NotFound();
 
-            return Ok(course);
+            var dto = new CoursesDto();
+
+            _mapper.Map(course, dto);
+
+            return Ok(dto);
+
         }
 
         //// PUT: api/Courses/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutCourse(int id, CoursesDto course)
+        //public async Task<IActionResult> PutFaculty(int id, [FromBody] CoursesDto dto)
         //{
-        //    if (id != course.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        //    var entry = await _context.Courses.FindAsync(id);
 
-        //    _context.Entry(course).State = EntityState.Modified;
+        //    if (entry == null) return BadRequest();
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!CourseExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        //    _mapper.Map(dto, entry);
+
+        //    var result = await _context.SaveChangesAsync() > 0;
+
+        //    if (!result) return StatusCode(500);
 
         //    return NoContent();
         //}
 
         //// POST: api/Courses
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         //[HttpPost]
-        //public async Task<ActionResult<Course>> PostCourse(Course course)
+        //public async Task<ActionResult<FacultyDto>> PostFaculty(Course course)
         //{
         //    _context.Courses.Add(course);
         //    await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+        //    return CreatedAtAction("GetFaculty", new { id = course.Id }, course);
         //}
 
         //// DELETE: api/Courses/5
         //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteCourse(int id)
+        //public async Task<IActionResult> DeleteFaculty(int id)
         //{
         //    var course = await _context.Courses.FindAsync(id);
-        //    if (course == null)
-        //    {
-        //        return NotFound();
-        //    }
+        //    if (course == null) return NotFound();
 
         //    _context.Courses.Remove(course);
-        //    await _context.SaveChangesAsync();
+        //    var result = await _context.SaveChangesAsync() > 0;
+
+        //    if (!result) return StatusCode(500);
 
         //    return NoContent();
-        //}
-
-        //private bool CourseExists(int id)
-        //{
-        //    return _context.Courses.Any(e => e.Id == id);
         //}
     }
 }

@@ -10,26 +10,11 @@ namespace facultyportal_backend.Helpers
         {
             CreateMap<Accessor, AccessorsDto>().ReverseMap();
 
-            CreateMap<Course, CoursesDto>()
-                .ReverseMap()
-                .ForMember(dest => dest.Division,
-                           opts => opts.MapFrom(src => new Division
-                           {
-                               Name = src.DivisionName
-                           }));
+            CreateMap<Course, CoursesDto>().ReverseMap();
 
             CreateMap<Division, DivisionsDto>().ReverseMap();
 
-            CreateMap<FacultyCourse, FacultyCoursesDto>()
-                .ReverseMap()
-                .ForMember(dest => dest.Course,
-                           opts => opts.MapFrom(src => new Course
-                           {
-                               Subject = src.CourseSubject,
-                               Number = src.CourseNumber,
-                               Title = src.CourseTitle,
-                               SectionNumber = src.SectionNumber,
-                           }));
+            CreateMap<FacultyCourse, FacultyCoursesDto>().ReverseMap();
 
             CreateMap<Faculty, FacultyDto>().ReverseMap();
 
