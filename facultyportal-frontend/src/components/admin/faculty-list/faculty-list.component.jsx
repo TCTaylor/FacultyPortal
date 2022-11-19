@@ -1,9 +1,28 @@
+import Modal from "../../modal/modal.component";
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function FacultyList({ faculty }) {
+  const [selectedFaculty, setSelectedFaculty] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    console.log("delete action heard");
+  };
+
   return (
     <div>
-      <div style={{float: 'right', paddingRight: '20px'}}>
+      <div style={{ float: "right", paddingRight: "20px" }}>
         <Link to={"/faculty-maint" + "/add"}>
           <button className="btn btn-primary" title="Add">
             <i className="bi bi-plus-lg"> </i>
@@ -19,6 +38,7 @@ function FacultyList({ faculty }) {
             <th scope="col">Last Name</th>
             <th scope="col">M. I.</th>
             <th scope="col">Suffix</th>
+            <th scope="col">Division</th>
             <th scope="col">Qualifications</th>
           </tr>
         </thead>
@@ -31,6 +51,7 @@ function FacultyList({ faculty }) {
                 <td>{fac.lastName}</td>
                 <td>{fac.midInit}</td>
                 <td>{fac.suffix}</td>
+                <td>{fac.divisionId}</td>
                 <td>
                   <table>
                     <tbody>
@@ -47,7 +68,7 @@ function FacultyList({ faculty }) {
                 <td>
                   <Link to={"/courses-maint/" + fac.instId}>
                     <button
-                      className="btn btn-outline-secondary"
+                      className="btn btn-outline-dark"
                       title="Edit Courses"
                     >
                       <i className="bi bi-journals"> </i>
@@ -55,16 +76,29 @@ function FacultyList({ faculty }) {
                     </button>
                   </Link>
                 </td>
-                <td>
+                <td width={60}>
                   <Link to={"/faculty-maint/" + fac.id}>
                     <button className="btn btn-dark" title="Edit">
                       <i className="bi bi-pencil-square"></i>
                     </button>
                   </Link>
                 </td>
-                <td>
+                <td width={60}>
                   <Link>
-                    <button className="btn btn-outline-danger" title="Delete">
+                    <button
+                      className="btn btn-outline-danger"
+                      title="Delete"
+                      onClick={() => {
+                        setSelectedFaculty({
+                          instId: fac.instId,
+                          firstName: fac.firstName,
+                          midInit: fac.midInit,
+                          lastName: fac.lastName,
+                          suffix: fac.suffix,
+                        });
+                        openModal();
+                      }}
+                    >
                       <i className="bi bi-trash3-fill"></i>
                     </button>
                   </Link>
@@ -74,6 +108,24 @@ function FacultyList({ faculty }) {
           })}
         </tbody>
       </table>
+      {modalOpen && (
+        <Modal
+          modalTitle={"Delete"}
+          modalBody={
+            <>
+              <p>
+                <i className="bi bi-exclamation-triangle-fill"> </i> Delete{" "}
+                {selectedFaculty.firstName} {selectedFaculty.midInit}.{" "}
+                {selectedFaculty.lastName} {selectedFaculty.suffix} (ID#{" "}
+                {selectedFaculty.instId})?
+              </p>
+            </>
+          }
+          modalClose={closeModal}
+          modalAction={handleDelete}
+          actionType="Delete"
+        />
+      )}
     </div>
   );
 }

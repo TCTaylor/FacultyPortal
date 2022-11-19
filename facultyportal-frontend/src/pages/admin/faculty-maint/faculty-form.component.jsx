@@ -10,14 +10,13 @@ const API_BASE_URL = "https://localhost:7078/api";
 function FacultyForm() {
   const { id } = useParams();
 
-  const [formValues, setFormValues] = useState([]);
+  const [formValues, setFormValues] = useState({});
+  const [divisions, setDivisions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Will call Courses controller
   useEffect(() => {
     axios
-      //.get("https://jsonplaceholder.typicode.com/users")
       .get(API_BASE_URL + "/Faculty/" + id)
       .then((response) => {
         setFormValues(response.data);
@@ -31,17 +30,63 @@ function FacultyForm() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/Divisions")
+      .then((response) => {
+        setDivisions(response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+
   if (loading) {
     return <Loading />;
   }
 
   if (error) {
-    return <Error error={error.response.status}/>;
+    return <Error error={error.response.status} />;
   }
 
   return (
     <div className="container mt-4">
-      <input title="qualifications" placeholder={formValues[0].qualifications[0]} />
+      <form onSubmit={handleSubmit}>
+        <label>ID</label>
+        <input disabled placeholder={formValues.instId} />
+
+        <label>First Name</label>
+        <input placeholder={formValues.firstName} />
+
+        <label>Last Name</label>
+        <input placeholder={formValues.lastName} />
+
+        <label>M. I.</label>
+        <input placeholder={formValues.midInit} />
+
+        <label>Suffix</label>
+        <input placeholder={formValues.suffix} />
+
+        <label>
+          Division
+          <select>
+            {divisions.map((division) => {
+              <option key={division.id} value={division.id}>
+                {division.name}
+              </option>;
+            })}
+          </select>
+        </label>
+
+        <label>Qualifications</label>
+        {formValues.qualifications.map((qual) => {
+          return <input key={qual.id} placeholder={qual.credential} />;
+        })}
+      </form>
     </div>
   );
 }

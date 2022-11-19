@@ -15,7 +15,7 @@ function CourseMaintenance() {
 
   const [loading, setLoading] = useState(true);
   const [facultyCourses, setFacultyCourses] = useState([]);
-  const [searchField, setSearchField] = useState(""); // [value, setValue]
+  const [searchField, setSearchField] = useState("");
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(null);
 
@@ -63,7 +63,7 @@ function CourseMaintenance() {
 
   return (
     <div className="container mt-4">
-      <h1>This is the Course Modification page</h1>
+      <h2>Courses for [Faculty Member]</h2>
       <SearchBox
         className="search-box"
         type="search"

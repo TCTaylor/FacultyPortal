@@ -1,10 +1,28 @@
+import Modal from "../../modal/modal.component";
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function CourseMaintList({ courses }) {
-  // console.log(courses);
+  const [selectedCourse, setSelectedCourse] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    console.log("delete action heard");
+  };
+
   return (
     <div>
-      <div style={{float: 'right', paddingRight: '20px'}}>
+      <div style={{ float: "right", paddingRight: "20px" }}>
         <Link to={"/courses-maint" + "/add"}>
           <button className="btn btn-primary" title="Add">
             <i className="bi bi-plus-lg"> </i>
@@ -30,24 +48,43 @@ function CourseMaintList({ courses }) {
                 <td>{course.courseTitle}</td>
                 <td>{course.sectionNumber}</td>
                 <td width={60}>
-                  <Link to={"/courses-maint/"}>
-                    <button className="btn btn-dark" title="Edit">
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                  </Link>
-                </td>
-                <td width={60}>
-                  <Link>
-                    <button className="btn btn-outline-danger" title="Delete">
-                      <i className="bi bi-trash3-fill"></i>
-                    </button>
-                  </Link>
+                  <button
+                    className="btn btn-outline-danger"
+                    title="Delete"
+                    onClick={() => {
+                      setSelectedCourse({
+                        subject: course.courseSubject,
+                        number: course.courseNumber,
+                        title: course.courseTitle,
+                      });
+                      openModal();
+                    }}
+                  >
+                    <i className="bi bi-trash3-fill"></i>
+                  </button>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      {modalOpen && (
+        <Modal
+          modalTitle={"Delete"}
+          modalBody={
+            <>
+              <p>
+                <i className="bi bi-exclamation-triangle-fill"> </i> Delete{" "}
+                {selectedCourse.subject} {selectedCourse.number} (
+                {selectedCourse.title}) from [Faculty Member]'s courses?
+              </p>
+            </>
+          }
+          modalClose={closeModal}
+          modalAction={handleDelete}
+          actionType="Delete"
+        />
+      )}
     </div>
   );
 }

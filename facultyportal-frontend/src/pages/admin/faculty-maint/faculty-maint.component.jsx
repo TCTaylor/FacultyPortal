@@ -12,11 +12,10 @@ const API_BASE_URL = "https://localhost:7078/api";
 function FacultyMaintenance() {
   const [loading, setLoading] = useState(true);
   const [faculty, setFaculty] = useState([]);
-  const [searchField, setSearchField] = useState(""); // [value, setValue]
+  const [searchField, setSearchField] = useState("");
   const [filteredFaculty, setFilteredFaculty] = useState(faculty);
   const [error, setError] = useState(null);
 
-  // Will call the Faculty controller
   useEffect(() => {
     axios
       .get(API_BASE_URL + "/Faculty")
@@ -44,7 +43,6 @@ function FacultyMaintenance() {
         }
       });
     setFilteredFaculty(newFilteredFaculty);
-    // console.log(filteredFaculty);
   }, [faculty, searchField]);
 
   const onSearchChange = (event) => {
