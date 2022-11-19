@@ -1,6 +1,6 @@
 import "./modal.styles.css";
 
-function Modal({ modalTitle, modalBody, modalClose, modalSave }) {
+function Modal({ modalTitle, modalBody, modalClose, modalAction, actionType }) {
   return (
     <div className="fp-modal-background">
       <div className="fp-modal-container">
@@ -15,7 +15,7 @@ function Modal({ modalTitle, modalBody, modalClose, modalSave }) {
         </div>
         <div className="fp-modal-footer">
           <button className="btn btn-secondary m-1" onClick={modalClose}>Cancel</button>
-          <button className="btn btn-danger m-1" onClick={modalSave}>Save</button>
+          <button className="btn btn-danger m-1" onClick={modalAction}>{actionType}</button>
         </div>
       </div>
     </div>

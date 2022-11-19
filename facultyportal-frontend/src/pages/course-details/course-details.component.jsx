@@ -1,4 +1,5 @@
 import DetailsList from "../../components/details-list/details-list.component";
+import Loading from "../../components/loading/loading.component";
 import Error from "../../components/error/error.component";
 
 import { useState, useEffect } from "react";
@@ -11,11 +12,10 @@ const API_BASE_URL = "https://localhost:7078/api";
 function CourseDetails() {
   const { id } = useParams();
 
-  const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Will call Courses controller
   useEffect(() => {
     axios
       .get(API_BASE_URL + "/Courses/" + id)
@@ -27,12 +27,12 @@ function CourseDetails() {
       .catch((error) => {
         setError(error);
         setLoading(false);
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error) {
@@ -41,9 +41,9 @@ function CourseDetails() {
 
   return (
     <div className="container mt-4">
-      <h3>This is the Course Details page</h3>
-      <div key={course[0].id}>
-        <DetailsList course={course[0]} />
+      <h2>Course Details</h2>
+      <div className="mt-4" key={course.id}>
+        <DetailsList course={course} />
       </div>
     </div>
   );

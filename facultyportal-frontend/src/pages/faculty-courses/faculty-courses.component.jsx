@@ -19,10 +19,8 @@ function FacultyCourses() {
 
   const { instId } = useAuth();
 
-  // Will call the FacultyCourses controller
   useEffect(() => {
     axios
-      //.get("https://jsonplaceholder.typicode.com/users")
       .get(API_BASE_URL + "/FacultyCourses/" + instId)
       .then((response) => {
         setFacultyCourses(response.data);

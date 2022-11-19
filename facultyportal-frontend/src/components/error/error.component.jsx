@@ -45,7 +45,7 @@ function Error(error) {
     }
   };
 
-  return <div>{renderSwitch()}</div>;
+  return <div className="container mt-4">{renderSwitch()}</div>;
 }
 
 export default Error;

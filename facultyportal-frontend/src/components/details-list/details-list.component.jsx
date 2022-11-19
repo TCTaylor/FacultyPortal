@@ -1,19 +1,25 @@
 function DetailsList({ course }) {
-  const { id, subject, number, title, maxSize, minSize, divisionName, sectionNumber } =
-    course;
+  const {
+    id,
+    subject,
+    number,
+    title,
+    maxSize,
+    minSize,
+    sectionNumber,
+  } = course;
 
   return (
     <div>
-      <table>
-        <thead>
+      <table className="table">
+      <thead className="table-dark">
           <tr>
-            <th>Subject</th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Maximum Size</th>
-            <th>Minimum Size</th>
-            <th>Division</th>
-            <th>Section</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Number</th>
+            <th scope="col">Title</th>
+            <th scope="col">Maximum Size</th>
+            <th scope="col">Minimum Size</th>
+            <th scope="col">Section</th>
           </tr>
         </thead>
         <tbody>
@@ -23,7 +29,6 @@ function DetailsList({ course }) {
             <td>{title}</td>
             <td>{maxSize}</td>
             <td>{minSize}</td>
-            <td>{divisionName}</td>
             <td>{sectionNumber}</td>
           </tr>
         </tbody>

@@ -5,7 +5,7 @@ import useAuth from "../../hooks/use-auth";
 const Home = () => {
   // const { user } = useContext(UserContext);
 
-  const { userName } = useAuth();
+  const { displayName } = useAuth();
 
   // useEffect(() => {
   //   UserService.getAccessor().then(
@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="container mt-4">
-      <h1>Welcome, {userName}</h1>
+      <h1>Welcome, {displayName}</h1>
     </div>
   );
 };

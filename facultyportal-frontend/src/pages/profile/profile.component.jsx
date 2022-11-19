@@ -21,20 +21,20 @@ function Profile() {
           <ul className="list-group">
             <Link style={{ textDecoration: "none" }}>
               <li className="list-group-item">
-                <i className="bi bi-list-task"> </i>
-                Tasks
+                <i className="bi bi-envelope"> </i>
+                Contact
               </li>
             </Link>
             <Link style={{ textDecoration: "none" }}>
               <li className="list-group-item">
-                <i className="bi bi-calendar4-week"> </i>
-                Calendar
+                <i className="bi bi-person-lines-fill"> </i>
+                Biography
               </li>
             </Link>
             <Link style={{ textDecoration: "none" }}>
               <li className="list-group-item">
-                <i className="bi bi-file-earmark-text"> </i>
-                Files
+                <i className="bi bi-link"> </i>
+                Links
               </li>
             </Link>
           </ul>

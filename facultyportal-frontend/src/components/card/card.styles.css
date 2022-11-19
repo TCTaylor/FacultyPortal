@@ -1,13 +1,10 @@
-/* TODO: Figure out how to change this to your liking */
-/* Pulled from monsters-rolodex from Yihua Zhang's Udemy course "Complete React Developer in 2022" */
-
 .card-container {
   display: flex;
   flex-direction: column;
   height: 200px;
-  background-color: rgb(69, 187, 187);
-  border: 1px solid grey;
-  border-radius: 5px;
+  background-color: rgb(109, 160, 201);
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 10px;
   padding: 25px;
   cursor: pointer;
   -moz-osx-font-smoothing: grayscale;
@@ -18,5 +15,5 @@
 }
 
 .card-container:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
 }

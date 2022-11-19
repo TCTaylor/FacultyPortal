@@ -1,5 +1,4 @@
 const useAuth = () => {
-  // console.log(localStorage.getItem("token"));
   const token = localStorage.getItem("token");
   let isAdmin = false;
   let isEditor = false;
@@ -11,10 +10,8 @@ const useAuth = () => {
 
     isAdmin = userInfo["isAdmin"];
     isEditor = userInfo["isEditor"];
-    isEditor = userInfo["isReadOnly"];
-    // isReadOnly = userInfo["isReadOnly"];
-
-    // console.log(id, instId, userName, displayName, isAdmin, isEditor, isReadOnly);
+    isReadOnly = userInfo["isReadOnly"];
+    
     const accessorId = id;
     return {
       accessorId,

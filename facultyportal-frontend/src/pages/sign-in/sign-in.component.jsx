@@ -17,6 +17,12 @@ function SignIn() {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (success) {
+      navigate("/");
+    }
+  }, [success]);
+
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -38,19 +44,13 @@ function SignIn() {
     }
   };
 
-  useEffect(() => {
-    if (success) {
-      navigate("/");
-    }
-  }, [success]);
-
   return (
     <div className="sign-in-container">
       <div className="row d-flex justify-content-center align-items-center">
         <div className="col col-xl-30">
           <div className="row g-0">
             <div className="col-md-6 col-lg-5 d-none d-md-block">
-              <img src={SignInImg} alt="Sign in form" className="img-fluid"/>
+              <img src={SignInImg} alt="Sign in form" className="img-fluid" />
             </div>
             <div className="col-md-6 col-lg-7 d-flex align-items-center">
               <div className="card-body p-4 p-lg-5 text-black">
