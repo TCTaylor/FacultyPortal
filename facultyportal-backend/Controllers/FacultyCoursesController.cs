@@ -32,11 +32,11 @@ namespace facultyportal_backend.Controllers
             return Ok(facultyCourses);
         }
 
-        [HttpGet("{instId}")]
-        public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCoursesByFaculty(int instId)
+        [HttpGet("{facultyId}")]
+        public async Task<ActionResult<FacultyCoursesDto>> GetFacultyCoursesByFaculty(int facultyId)
         {
             var facultyCourses = await _context.FacultyCourses
-                .Where(x => x.Faculty.InstId == instId)
+                .Where(x => x.Faculty.Id == facultyId)
                 .ToListAsync();
 
             if (!facultyCourses.Any()) return NotFound();

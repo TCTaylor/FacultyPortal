@@ -11,17 +11,18 @@ import axios from "axios";
 const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseMaintenance() {
-  const { instId } = useParams();
+  const { facultyId } = useParams();
 
   const [loading, setLoading] = useState(true);
   const [facultyCourses, setFacultyCourses] = useState([]);
+  const [faculty, setFaculty] = useState({});
   const [searchField, setSearchField] = useState("");
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/FacultyCourses/" + instId)
+      .get(API_BASE_URL + "/FacultyCourses/" + facultyId)
       .then((response) => {
         setFacultyCourses(response.data);
         setLoading(false);
@@ -31,6 +32,17 @@ function CourseMaintenance() {
         setError(error);
         setLoading(false);
         console.log(error.response.status);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/Faculty/" + facultyId)
+      .then((response) => {
+        setFaculty(response.data);
+      })
+      .catch((error) => {
+        setError(error);
       });
   }, []);
 
@@ -63,7 +75,7 @@ function CourseMaintenance() {
 
   return (
     <div className="container mt-4">
-      <h2>Courses for [Faculty Member]</h2>
+      <h2>Courses for {faculty.firstName} {faculty.lastName}</h2>
       <SearchBox
         className="search-box"
         type="search"

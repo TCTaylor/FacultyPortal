@@ -1,11 +1,19 @@
 import Modal from "../../modal/modal.component";
+import Loading from "../../loading/loading.component";
+import Error from "../../error/error.component";
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import axios from "axios";
+
+const API_BASE_URL = "https://localhost:7078/api";
+
 function FacultyList({ faculty }) {
   const [selectedFaculty, setSelectedFaculty] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const openModal = () => {
     setModalOpen(true);
@@ -17,13 +25,30 @@ function FacultyList({ faculty }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("delete action heard");
+    setModalOpen(false);
+    setLoading(true);
+    axios
+      .delete(API_BASE_URL + "/Faculty/" + selectedFaculty.id)
+      .then((response) => {
+        if (response) window.location.reload(false);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error error={error.response.status} />;
+  }
 
   return (
     <div>
-      <div style={{ float: "right", paddingRight: "20px" }}>
-        <Link to={"/faculty-maint" + "/add"}>
+      <div style={{ float: "right", paddingRight: "15px" }}>
+        <Link to={"/faculty-maint/" + "add"}>
           <button className="btn btn-primary" title="Add">
             <i className="bi bi-plus-lg"> </i>
             Add Faculty
@@ -66,7 +91,7 @@ function FacultyList({ faculty }) {
                   </table>
                 </td>
                 <td>
-                  <Link to={"/courses-maint/" + fac.instId}>
+                  <Link to={"/courses-maint/" + fac.id}>
                     <button
                       className="btn btn-outline-dark"
                       title="Edit Courses"
@@ -90,6 +115,7 @@ function FacultyList({ faculty }) {
                       title="Delete"
                       onClick={() => {
                         setSelectedFaculty({
+                          id: fac.id,
                           instId: fac.instId,
                           firstName: fac.firstName,
                           midInit: fac.midInit,

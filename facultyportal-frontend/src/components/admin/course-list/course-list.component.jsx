@@ -1,11 +1,33 @@
 import Modal from "../../modal/modal.component";
+import Loading from "../../loading/loading.component";
+import Error from "../../error/error.component";
 
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+
+import axios from "axios";
+
+const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseMaintList({ courses }) {
+  const { facultyId } = useParams();
+
+  const [loading, setLoading] = useState(false);
+  const [faculty, setFaculty] = useState({});
   const [selectedCourse, setSelectedCourse] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/Faculty/" + facultyId)
+      .then((response) => {
+        setFaculty(response.data);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, []);
 
   const openModal = () => {
     setModalOpen(true);
@@ -17,13 +39,30 @@ function CourseMaintList({ courses }) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("delete action heard");
+    setModalOpen(false);
+    setLoading(true);
+    // axios
+    //   .delete(API_BASE_URL + "/FacultyCourses/" + selectedCourse.id)
+    //   .then((response) => {
+    //     if (response) window.location.reload(false);
+    //   })
+    //   .catch((error) => {
+    //     setError(error);
+    //   });
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error error={error.response.status} />;
+  }
+
   return (
-    <div>
-      <div style={{ float: "right", paddingRight: "20px" }}>
-        <Link to={"/courses-maint" + "/add"}>
+    <div style={{ maxWidth: "800px" }}>
+      <div style={{ float: "right", paddingRight: "15px" }}>
+        <Link to={"/courses-maint" + "/add/" + facultyId}>
           <button className="btn btn-primary" title="Add">
             <i className="bi bi-plus-lg"> </i>
             Add Course
@@ -43,10 +82,10 @@ function CourseMaintList({ courses }) {
           {courses.map((course) => {
             return (
               <tr key={course.courseId}>
-                <td>{course.courseSubject}</td>
-                <td>{course.courseNumber}</td>
-                <td>{course.courseTitle}</td>
-                <td>{course.sectionNumber}</td>
+                <td width={100}>{course.courseSubject}</td>
+                <td width={100}>{course.courseNumber}</td>
+                <td width={250}>{course.courseTitle}</td>
+                <td width={200}>{course.sectionNumber}</td>
                 <td width={60}>
                   <button
                     className="btn btn-outline-danger"
@@ -76,7 +115,11 @@ function CourseMaintList({ courses }) {
               <p>
                 <i className="bi bi-exclamation-triangle-fill"> </i> Delete{" "}
                 {selectedCourse.subject} {selectedCourse.number} (
-                {selectedCourse.title}) from [Faculty Member]'s courses?
+                {selectedCourse.title}) from
+              </p>
+              <p>
+                {faculty.firstName} {faculty.lastName} (ID# {faculty.instId})'s
+                courses?
               </p>
             </>
           }

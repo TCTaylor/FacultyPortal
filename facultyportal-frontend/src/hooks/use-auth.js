@@ -6,16 +6,17 @@ const useAuth = () => {
 
   if (token) {
     const userInfo = JSON.parse(token);
-    const { id, instId, role, userName, displayName } = userInfo;
+    const { id, instId, facultyId, role, userName, displayName } = userInfo;
 
     isAdmin = userInfo["isAdmin"];
     isEditor = userInfo["isEditor"];
     isReadOnly = userInfo["isReadOnly"];
-    
+
     const accessorId = id;
     return {
       accessorId,
       instId,
+      facultyId,
       role,
       userName,
       displayName,

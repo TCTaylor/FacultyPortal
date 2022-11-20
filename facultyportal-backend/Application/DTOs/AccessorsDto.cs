@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int InstId { get; set; }
+        public int FacultyId { get; set; }
         public string RoleId { get; set; } = null!;
         public string UserName { get; set; } = null!;
         public string DisplayName { get; set; } = null!;

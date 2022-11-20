@@ -14,8 +14,9 @@ import FacultyCourses from "./pages/faculty-courses/faculty-courses.component";
 import CourseDetails from "./pages/course-details/course-details.component";
 import FacultyMaintenance from "./pages/admin/faculty-maint/faculty-maint.component";
 import FacultyForm from "./pages/admin/faculty-maint/faculty-form.component";
+import FacultyAddForm from "./pages/admin/faculty-maint/faculty-add-form.component";
 import CourseMaintenance from "./pages/admin/course-maint/course-maint.component";
-import CourseForm from "./pages/admin/course-maint/course-form.component";
+import CourseAddForm from "./pages/admin/course-maint/course-add-form.component";
 
 import "./App.css";
 
@@ -44,9 +45,10 @@ function App() {
 
           <Route path="/faculty-maint" element={<FacultyMaintenance />} />
           <Route path="/faculty-maint/:id" element={<FacultyForm />} />
+          <Route path="/faculty-maint/add" element={<FacultyAddForm />} />
 
-          <Route path="/courses-maint/:instId" element={<CourseMaintenance />} />
-          <Route path="/courses-maint/add" element={<CourseForm />} />
+          <Route path="/courses-maint/:facultyId" element={<CourseMaintenance />} />
+          <Route path="/courses-maint/add/:facultyId" element={<CourseAddForm />} />
         </Route>
       </Routes>
     </div>

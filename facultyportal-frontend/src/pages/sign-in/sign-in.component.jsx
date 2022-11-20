@@ -95,13 +95,13 @@ function SignIn() {
                     />
                   </div>
                   <div className="form-check d-flex mb-4">
-                    <input className="form-check-input me-2" type="checkbox" />
+                    <input type="checkbox" className="form-check-input me-2" />
                     <label className="form-check-label">
                       Remember password
                     </label>
                   </div>
                   <div className="pt-1 mb-4">
-                    <button className="btn btn-dark" type="submit">
+                    <button type="submit" className="btn btn-dark">
                       {loading && (
                         <span
                           className="spinner-border spinner-border-sm"

@@ -17,11 +17,11 @@ function FacultyCourses() {
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(null);
 
-  const { instId } = useAuth();
+  const { facultyId } = useAuth();
 
   useEffect(() => {
     axios
-      .get(API_BASE_URL + "/FacultyCourses/" + instId)
+      .get(API_BASE_URL + "/FacultyCourses/" + facultyId)
       .then((response) => {
         setFacultyCourses(response.data);
         setLoading(false);
