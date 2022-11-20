@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import UserContext from "../../context/user-context";
+// import UserContext from "../../context/user-context";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth-service";
 
@@ -14,7 +14,7 @@ function SignIn() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-  const { setUser } = useContext(UserContext);
+  // const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function SignIn() {
     setLoading(true);
     const user = await signIn(email, password);
     if (user) {
-      setUser(user);
+      // setUser(user);
       setSuccess(true);
     } else {
       setError(true);

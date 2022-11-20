@@ -1,25 +1,32 @@
 const useAuth = () => {
   const token = localStorage.getItem("token");
-  let isAdmin = false;
-  let isEditor = false;
-  let isReadOnly = true;
 
   if (token) {
     const userInfo = JSON.parse(token);
-    const { id, instId, facultyId, role, userName, displayName } = userInfo;
+    const {
+      id,
+      instId,
+      facultyId,
+      userName,
+      displayName,
+      isAdmin,
+      isEditor,
+      isReadOnly,
+    } = userInfo;
 
-    isAdmin = userInfo["isAdmin"];
-    isEditor = userInfo["isEditor"];
-    isReadOnly = userInfo["isReadOnly"];
+    const roles = [];
+    if (isAdmin) roles.push("isAdmin");
+    if (isEditor) roles.push("isEditor");
+    if (isReadOnly) roles.push("isReadOnly");
 
     const accessorId = id;
     return {
       accessorId,
       instId,
       facultyId,
-      role,
       userName,
       displayName,
+      roles,
       isAdmin,
       isEditor,
       isReadOnly,

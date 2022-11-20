@@ -61,55 +61,29 @@ namespace facultyportal_backend.Controllers
             var faculty = await _context.Faculty
                 .FirstOrDefaultAsync(x => x.InstId == accessor.InstId);
 
-            if (faculty != null)
+            return new AccessorsDto
             {
-                return new AccessorsDto
-                {
-                    Id = accessor.Id,
-                    InstId = accessor.InstId,
-                    FacultyId = faculty.Id,
-                    RoleId = accessor.RoleId,
-                    UserName = accessor.UserName,
-                    DisplayName = faculty.FirstName + " " + faculty.LastName,
-                    Email = accessor.Email,
-                    Password = accessor.Password,
-                    RoleTitle = accessor.Role.Title,
-                    DivisionId = accessor.Division.Id,
+                Id = accessor.Id,
+                InstId = accessor.InstId,
+                FacultyId = (faculty != null) ? faculty.Id : 0,
+                RoleId = accessor.RoleId,
+                UserName = accessor.UserName,
+                DisplayName = (faculty != null)
+                              ? faculty.FirstName : accessor.UserName,
+                Email = accessor.Email,
+                Password = accessor.Password,
+                RoleTitle = accessor.Role.Title,
+                DivisionId = accessor.Division.Id,
 
-                    // Roles
-                    IsAdmin = accessor.RoleId.Equals("Adm"),
-                    IsEditor = accessor.RoleId.Equals("E"),
-                    IsReadOnly = accessor.RoleId.Equals("R"),
+                // Roles
+                IsAdmin = accessor.RoleId.Equals("Adm"),
+                IsEditor = accessor.RoleId.Equals("E"),
+                IsReadOnly = accessor.RoleId.Equals("R"),
 
-                    // Authentication token
-                    //Token = _tokenService.CreateToken(accessor),
-                    Token = "test123",
-                };
-            }
-            else
-            {
-                return new AccessorsDto
-                {
-                    Id = accessor.Id,
-                    InstId = accessor.InstId,
-                    RoleId = accessor.RoleId,
-                    UserName = accessor.UserName,
-                    DisplayName = accessor.UserName,
-                    Email = accessor.Email,
-                    Password = accessor.Password,
-                    RoleTitle = accessor.Role.Title,
-                    DivisionId = accessor.Division.Id,
-
-                    // Roles
-                    IsAdmin = accessor.RoleId.Equals("Adm"),
-                    IsEditor = accessor.RoleId.Equals("E"),
-                    IsReadOnly = accessor.RoleId.Equals("R"),
-
-                    // Authentication token
-                    //Token = _tokenService.CreateToken(accessor),
-                    Token = "test123",
-                };
-            }
+                // Authentication token
+                //Token = _tokenService.CreateToken(accessor),
+                Token = "test123",
+            };
         }
     }
 }

@@ -67,25 +67,25 @@ function Navigation() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {isReadOnly && (
                 <>
-                  <li className="nav-item" style={{fontWeight: 750}}>
+                  <li className="nav-item" style={{ fontWeight: 750 }}>
                     <Link className="nav-link" to={"/courses"}>
                       <i className="bi bi-journals"> </i>
                       Courses
                     </Link>
                   </li>
-                  <li className="nav-item" style={{fontWeight: 750}}>
+                  <li className="nav-item" style={{ fontWeight: 750 }}>
                     <Link className="nav-link">
                       <i className="bi bi-list-task"> </i>
                       Tasks
                     </Link>
                   </li>
-                  <li className="nav-item" style={{fontWeight: 750}}>
+                  <li className="nav-item" style={{ fontWeight: 750 }}>
                     <Link className="nav-link">
                       <i className="bi bi-calendar4-week"> </i>
                       Calendar
                     </Link>
                   </li>
-                  <li className="nav-item" style={{fontWeight: 750}}>
+                  <li className="nav-item" style={{ fontWeight: 750 }}>
                     <Link className="nav-link">
                       <i className="bi bi-file-earmark-text"> </i>
                       Files
@@ -94,7 +94,7 @@ function Navigation() {
                 </>
               )}
               {(isAdmin || isEditor) && (
-                <li className="nav-item" style={{fontWeight: 750}}>
+                <li className="nav-item" style={{ fontWeight: 750 }}>
                   <Link className="nav-link" to={"/faculty-maint"}>
                     <i className="bi bi-people-fill"> </i>
                     Faculty
@@ -104,7 +104,7 @@ function Navigation() {
             </ul>
             <div className="auth-dropdown d-flex">
               <ul className="navbar-nav">
-                <li className="nav-item dropdown" style={{fontWeight: 750}}>
+                <li className="nav-item dropdown" style={{ fontWeight: 750 }}>
                   <Link
                     className="nav-link dropdown-toggle"
                     id="navbarDropdownMenuLink"
