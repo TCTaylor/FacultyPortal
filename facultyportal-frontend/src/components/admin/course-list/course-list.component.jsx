@@ -112,15 +112,11 @@ function CourseMaintList({ courses }) {
           modalTitle={"Delete"}
           modalBody={
             <>
-              <p>
-                <i className="bi bi-exclamation-triangle-fill"> </i> Delete{" "}
-                {selectedCourse.subject} {selectedCourse.number} (
-                {selectedCourse.title}) from
-              </p>
-              <p>
-                {faculty.firstName} {faculty.lastName} (ID# {faculty.instId})'s
-                courses?
-              </p>
+              <i className="bi bi-exclamation-triangle-fill"> </i>
+              Delete {selectedCourse.subject} {selectedCourse.number} (
+              {selectedCourse.title}) from <br />
+              {faculty.firstName} {faculty.lastName} (ID# {faculty.instId})'s
+              courses?
             </>
           }
           modalClose={closeModal}

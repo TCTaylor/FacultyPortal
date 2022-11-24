@@ -1,3 +1,11 @@
+.navigation {
+  font-size: 16px;
+}
+
+.navigation i {
+  font-size: 20px;
+}
+
 .logo {
   height: 60px;
   width: 100px;

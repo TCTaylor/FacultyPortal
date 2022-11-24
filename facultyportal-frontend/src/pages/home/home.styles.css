@@ -1,0 +1,37 @@
+.home-card-list {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 16rem));
+  grid-gap: 20px;
+  text-align: center;
+}
+
+.home-card-container {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  background-color: rgb(231, 231, 231);
+  border: 1px solid rgb(75, 75, 75);
+  border-radius: 10px;
+  padding: 25px;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.home-card-container:hover {
+  transform: scale(1.05);
+}
+
+.home a {
+  text-decoration: none;
+  color: black;
+}
+
+.home i {
+  font-size: 50px;
+  padding-bottom: 20px;
+}

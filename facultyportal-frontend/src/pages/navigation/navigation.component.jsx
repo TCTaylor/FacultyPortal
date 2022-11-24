@@ -46,7 +46,7 @@ function Navigation() {
   return (
     <Fragment>
       <div className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
+        <div className="navigation container-fluid">
           <Link to="/">
             <div className="navbar-brand">
               <FPLogo className="logo" />

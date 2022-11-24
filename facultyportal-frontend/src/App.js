@@ -10,6 +10,7 @@ import {
 import Navigation from "./pages/navigation/navigation.component";
 import Home from "./pages/home/home.component";
 import SignIn from "./pages/sign-in/sign-in.component";
+import PasswordReset from "./pages/password-reset/password-reset-component";
 import Profile from "./pages/profile/profile.component";
 import FacultyCourses from "./pages/faculty-courses/faculty-courses.component";
 import CourseDetails from "./pages/course-details/course-details.component";
@@ -39,6 +40,8 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/pw-reset" element={<PasswordReset />} />
+        
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
 

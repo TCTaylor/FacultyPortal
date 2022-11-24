@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 // import UserContext from "../../context/user-context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signIn } from "../../services/auth-service";
 
 import SignInImg from "../../assets/photo-1568667256549-094345857637.jpg";
@@ -111,6 +111,7 @@ function SignIn() {
                       Sign In
                     </button>
                   </div>
+                  <Link to={"/pw-reset"}>Forgot your password?</Link>
                 </form>
               </div>
             </div>
