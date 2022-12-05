@@ -1,13 +1,11 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { API_BASE_URL } from "../../../api/api";
+import axios from "axios";
+
 import Modal from "../../modal/modal.component";
 import Loading from "../../loading/loading.component";
 import Error from "../../error/error.component";
-
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-
-import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseMaintList({ courses }) {
   const { facultyId } = useParams();
@@ -41,14 +39,15 @@ function CourseMaintList({ courses }) {
     e.preventDefault();
     setModalOpen(false);
     setLoading(true);
-    // axios
-    //   .delete(API_BASE_URL + "/FacultyCourses/" + selectedCourse.id)
-    //   .then((response) => {
-    //     if (response) window.location.reload(false);
-    //   })
-    //   .catch((error) => {
-    //     setError(error);
-    //   });
+    console.log(selectedCourse.id);
+    axios
+      .delete(API_BASE_URL + "/FacultyCourses/" + selectedCourse.id)
+      .then((response) => {
+        if (response) window.location.reload(false);
+      })
+      .catch((error) => {
+        setError(error);
+      });
   };
 
   if (loading) {
@@ -92,6 +91,7 @@ function CourseMaintList({ courses }) {
                     title="Delete"
                     onClick={() => {
                       setSelectedCourse({
+                        id: course.id,
                         subject: course.courseSubject,
                         number: course.courseNumber,
                         title: course.courseTitle,
@@ -113,10 +113,8 @@ function CourseMaintList({ courses }) {
           modalBody={
             <>
               <i className="bi bi-exclamation-triangle-fill"> </i>
-              Delete {selectedCourse.subject} {selectedCourse.number} (
-              {selectedCourse.title}) from <br />
-              {faculty.firstName} {faculty.lastName} (ID# {faculty.instId})'s
-              courses?
+              Delete {selectedCourse.subject} {selectedCourse.number} from 
+              Dr. {faculty.firstName} {faculty.lastName}'s courses?
             </>
           }
           modalClose={closeModal}

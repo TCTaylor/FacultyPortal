@@ -1,19 +1,18 @@
+import { useState, useEffect } from "react";
+import useAuth from "../../hooks/use-auth";
+
+import { API_BASE_URL } from "../../api/api";
+import axios from "axios";
+
 import CourseList from "../../components/course-list/course-list.component";
 import SearchBox from "../../components/search-box/search-box.component";
 import Loading from "../../components/loading/loading.component";
 import Error from "../../components/error/error.component";
 
-import { useState, useEffect } from "react";
-import useAuth from "../../hooks/use-auth";
-
-import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
-
 function FacultyCourses() {
   const [loading, setLoading] = useState(true);
   const [facultyCourses, setFacultyCourses] = useState([]);
-  const [searchField, setSearchField] = useState(""); // [value, setValue]
+  const [searchField, setSearchField] = useState("");
   const [filteredCourses, setFilteredCourses] = useState(facultyCourses);
   const [error, setError] = useState(null);
 
@@ -30,7 +29,7 @@ function FacultyCourses() {
       .catch((error) => {
         setError(error);
         setLoading(false);
-        console.log(error.response.status);
+        //console.log(error.response.status);
       });
   }, []);
 

@@ -68,7 +68,7 @@ namespace facultyportal_backend.Controllers
 
         // POST: api/FacultyCourses
         [HttpPost]
-        public async Task<ActionResult<ProfileImagesDto>> PostProfileImage(FacultyCourse facultyCourse)
+        public async Task<ActionResult<FacultyCoursesDto>> PostFacultyCourse(FacultyCourse facultyCourse)
         {
             _context.FacultyCourses.Add(facultyCourse);
 

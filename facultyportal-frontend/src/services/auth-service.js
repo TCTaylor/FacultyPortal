@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
+import { API_BASE_URL } from "../api/api";
 
 const signIn = async (email, password) => {
   try {
@@ -32,7 +31,7 @@ const signIn = async (email, password) => {
 
 const signOut = () => {
   localStorage.removeItem("token");
-  console.log("signed out!");
+  // console.log("signed out!");
 };
 
 export { signIn, signOut };

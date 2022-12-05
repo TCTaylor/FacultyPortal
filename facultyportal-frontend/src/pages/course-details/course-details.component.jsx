@@ -4,10 +4,9 @@ import Error from "../../components/error/error.component";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { API_BASE_URL } from "../../api/api";
 
 import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseDetails() {
   const { id } = useParams();

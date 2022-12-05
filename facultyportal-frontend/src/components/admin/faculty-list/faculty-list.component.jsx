@@ -1,13 +1,11 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { API_BASE_URL } from "../../../api/api";
+import axios from "axios";
+
 import Modal from "../../modal/modal.component";
 import Loading from "../../loading/loading.component";
 import Error from "../../error/error.component";
-
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
-import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
 
 function FacultyList({ faculty }) {
   const [selectedFaculty, setSelectedFaculty] = useState({});

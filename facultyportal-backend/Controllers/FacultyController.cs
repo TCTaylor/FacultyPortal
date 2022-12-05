@@ -96,7 +96,17 @@ namespace facultyportal_backend.Controllers
 
             if (entry == null) return BadRequest();
 
-            _mapper.Map(dto, entry);
+            var faculty = new Faculty()
+            {
+                Id = dto.Id,
+                InstId = dto.InstId,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                MidInit = dto.MidInit,
+                Suffix = dto.Suffix
+            };
+
+            _mapper.Map(faculty, entry);
 
             var result = await _context.SaveChangesAsync() > 0;
 
@@ -111,6 +121,7 @@ namespace facultyportal_backend.Controllers
         public async Task<ActionResult<FacultyDto>> PostFaculty(Faculty faculty)
         {
             _context.Faculty.Add(faculty);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFaculty", new { id = faculty.Id }, faculty);

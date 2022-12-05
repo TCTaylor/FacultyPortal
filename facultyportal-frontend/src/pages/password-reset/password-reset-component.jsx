@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Loading from "../../components/loading/loading.component";
 
-const API_BASE_URL = "https://localhost:7078/api";
+import { API_BASE_URL } from "../../api/api";
 
 function PasswordReset() {
   const [userName, setUserName] = useState("");

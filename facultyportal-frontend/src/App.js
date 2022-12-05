@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate, } from "react-router-dom";
+import { ROLES } from "./features/roles";
+import RequireAuth from "./features/require-auth";
 
 import Navigation from "./pages/navigation/navigation.component";
 import Home from "./pages/home/home.component";
@@ -20,9 +16,6 @@ import FacultyAddForm from "./pages/admin/faculty-maint/faculty-add-form.compone
 import CourseMaintenance from "./pages/admin/course-maint/course-maint.component";
 import CourseAddForm from "./pages/admin/course-maint/course-add-form.component";
 
-import RequireAuth from "./features/require-auth";
-import { ROLES } from "./features/roles";
-
 import "./App.css";
 
 function App() {
@@ -31,10 +24,9 @@ function App() {
 
   useEffect(() => {
     if (!token) {
-      console.log("no token, going to Sign In component");
       navigate("/sign-in");
     }
-  }, [token]);
+  }, [token, navigate]);
 
   return (
     <div className="App">
@@ -47,7 +39,6 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[ROLES.isReadOnly]} />}>
             <Route path="/profile" element={<Profile />} />
-
             <Route path="/courses" element={<FacultyCourses />} />
             <Route path="/courses/:id" element={<CourseDetails />} />
           </Route>
@@ -56,11 +47,9 @@ function App() {
             <Route path="/faculty-maint" element={<FacultyMaintenance />} />
             <Route path="/faculty-maint/:id" element={<FacultyForm />} />
             <Route path="/faculty-maint/add" element={<FacultyAddForm />} />
-
             <Route path="/courses-maint/:facultyId" element={<CourseMaintenance />} />
             <Route path="/courses-maint/add/:facultyId" element={<CourseAddForm />} />
           </Route>
-          
         </Route>
       </Routes>
     </div>

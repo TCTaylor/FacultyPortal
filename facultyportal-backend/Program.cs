@@ -15,8 +15,6 @@ builder.Services.AddSwaggerGen();
 
 // Connect to database
 string connString = builder.Configuration.GetConnectionString("FPLocalDbConnection");
-//string connString = builder.Configuration.GetConnectionString("FPVirtualDbConnection");
-//string connString = builder.Configuration.GetConnectionString("FPLinuxDbConnection");
 builder.Services.AddDbContext<FacultyPortalContext>(options =>
     options.UseSqlServer(connString));
 

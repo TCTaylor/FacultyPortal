@@ -6,7 +6,6 @@
   border: 1px solid rgb(75, 75, 75);
   border-radius: 10px;
   padding: 25px;
-  cursor: pointer;
   -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
   transform: translateZ(0);
@@ -16,4 +15,14 @@
 
 .card-container:hover {
   transform: scale(1.02);
+}
+
+.card-menu i {
+  float: right;
+  color: white;
+  cursor: pointer
+}
+
+.card-menu i:hover {
+  color: black;
 }

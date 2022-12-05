@@ -6,17 +6,16 @@ import { signOut } from "../../services/auth-service";
 import { useEffect, useState } from "react";
 
 import useAuth from "../../hooks/use-auth";
+import { API_BASE_URL } from "../../api/api";
+
 import axios from "axios";
 
 import DfltProfileImg from "../../assets/user-profile-icon-free-vector.webp";
 import "./navigation.styles.css";
 
-const API_BASE_URL = "https://localhost:7078/api";
-
 function Navigation() {
   const [signingOut, setSigningOut] = useState(false);
-  // const [profileImgData, setProfileImgData] = useState([]);
-  // const [profileImg, setProfileImg] = useState(null);
+  const [profileImg, setProfileImg] = useState(null);
 
   const { accessorId, displayName, isAdmin, isEditor, isReadOnly } = useAuth();
   const navigate = useNavigate();
@@ -30,18 +29,17 @@ function Navigation() {
       signOut();
       navigate("/sign-in");
     }
-  }, [signingOut]);
+  }, [signingOut, navigate]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(API_BASE_URL + "/ProfileImages/" + accessorId)
-  //     .then((response) => {
-  //       setProfileImgData(response.data);
-  //       setProfileImg(URL.createObjectURL(profileImgData[0].imagePath));
-  //     })
-  //     .catch((error) => {
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(API_BASE_URL + "/ProfileImages/" + accessorId)
+      .then((response) => {
+        setProfileImg(response.data.imagePath);
+      })
+      .catch((error) => {
+      });
+  }, [accessorId]);
 
   return (
     <Fragment>
@@ -114,9 +112,8 @@ function Navigation() {
                   >
                     <img
                       className="rounded-circle shadow-4"
-                      // src={profileImg ? profileImg : DfltProfileImg}
-                      src={DfltProfileImg}
-                      alt="Profile picture"
+                      src={profileImg ? profileImg : DfltProfileImg}
+                      alt="Profile"
                       width="60"
                       height="60"
                     />

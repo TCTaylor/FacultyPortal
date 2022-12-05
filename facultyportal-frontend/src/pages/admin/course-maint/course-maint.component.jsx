@@ -6,9 +6,8 @@ import Error from "../../../components/error/error.component";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import { API_BASE_URL } from "../../../api/api";
 import axios from "axios";
-
-const API_BASE_URL = "https://localhost:7078/api";
 
 function CourseMaintenance() {
   const { facultyId } = useParams();
@@ -31,9 +30,9 @@ function CourseMaintenance() {
       .catch((error) => {
         setError(error);
         setLoading(false);
-        console.log(error.response.status);
+        // console.log(error.response.status);
       });
-  }, []);
+  }, [facultyId]);
 
   useEffect(() => {
     axios
@@ -44,7 +43,7 @@ function CourseMaintenance() {
       .catch((error) => {
         setError(error);
       });
-  }, []);
+  }, [facultyId]);
 
   useEffect(() => {
     const newFilteredCourses = facultyCourses.filter((facultyCourse) => {
@@ -75,7 +74,7 @@ function CourseMaintenance() {
 
   return (
     <div className="container mt-4">
-      <h2>Courses for {faculty.firstName} {faculty.lastName}</h2>
+      <h2>Courses for Dr. {faculty.firstName} {faculty.lastName}</h2>
       <SearchBox
         className="search-box"
         type="search"
